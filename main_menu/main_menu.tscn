@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://kw4h7hokcf08"]
+
+[ext_resource type="Script" uid="uid://bkdhdk2pnagjr" path="res://main_menu/main_menu.gd" id="1_d3a7t"]
+[ext_resource type="Theme" uid="uid://c4nw1nrfaf1ad" path="res://themes/base_theme.tres" id="1_oa53l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ucjh"]
+content_margin_left = 10.0
+content_margin_top = 20.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_whgls"]
+font_size = 125
+font_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_d3a7t")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_oa53l")
+
+[node name="Vbox" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 130
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Vbox"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/Vbox/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4ucjh")
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/Vbox/MarginContainer/PanelContainer"]
+layout_mode = 2
+text = "Boat simulator"
+label_settings = SubResource("LabelSettings_whgls")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/MarginContainer/Vbox/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="Continue" type="Button" parent="CanvasLayer/MarginContainer/Vbox/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/MarginContainer/Vbox/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/MarginContainer/Vbox/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
