@@ -2,11 +2,14 @@ extends BaseView
 
 signal change_play_game
 
+@onready var play_button: Button = $CanvasLayer/MarginContainer/Vbox/VBoxContainer/PlayButton
+
 func _ready() -> void:
 	print("mainmenu ready")
+	play_button.pressed.connect(enter_intro)
 
-func enter_campaing() -> void:
-	base_change_screen_signal.emit(screens.play)
+func enter_intro() -> void:
+	base_change_screen_signal.emit(screens.intro)
 
 func quit_main_menu() -> void:
 	get_tree().quit()

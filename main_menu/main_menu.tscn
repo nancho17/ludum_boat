@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://kw4h7hokcf08"]
 
 [ext_resource type="Script" uid="uid://bkdhdk2pnagjr" path="res://main_menu/main_menu.gd" id="1_d3a7t"]
-[ext_resource type="Theme" uid="uid://c4nw1nrfaf1ad" path="res://themes/base_theme.tres" id="1_oa53l"]
+[ext_resource type="Theme" uid="uid://c4nw1nrfaf1ad" path="res://general/base_theme.tres" id="1_oa53l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ucjh"]
 content_margin_left = 10.0
@@ -65,16 +65,20 @@ size_flags_vertical = 4
 
 [node name="PlayButton" type="Button" parent="CanvasLayer/MarginContainer/Vbox/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"ButtonMenu"
 text = "New Game"
 
 [node name="Continue" type="Button" parent="CanvasLayer/MarginContainer/Vbox/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"ButtonMenu"
 text = "Continue"
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer/MarginContainer/Vbox/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"ButtonMenu"
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="CanvasLayer/MarginContainer/Vbox/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"ButtonMenu"
 text = "Quit"

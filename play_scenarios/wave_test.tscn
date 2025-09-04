@@ -1,0 +1,443 @@
+[gd_scene load_steps=21 format=3 uid="uid://by4tfcdedca76"]
+
+[ext_resource type="Script" uid="uid://bq5edjwfa2iyy" path="res://play_scenarios/wave_test.gd" id="1_hb5kt"]
+[ext_resource type="Shader" uid="uid://bvogrwwn7gsyx" path="res://play_scenarios/water_wave.gdshader" id="6_asux5"]
+[ext_resource type="Script" uid="uid://ybya1hglhid" path="res://play_scenarios/water.gd" id="7_asux5"]
+[ext_resource type="Shader" uid="uid://d3b8h3ifjfexq" path="res://play_scenarios/water_wave_freq_capp.gdshader" id="8_hb5kt"]
+[ext_resource type="PackedScene" uid="uid://cvvgqjpep4k3t" path="res://play_scenarios/boat/cube_float.tscn" id="9_hb5kt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mhlc"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_rfikw"]
+sky_material = SubResource("ProceduralSkyMaterial_0mhlc")
+
+[sub_resource type="Environment" id="Environment_6lwxi"]
+background_mode = 2
+sky = SubResource("Sky_rfikw")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u81vp"]
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6u7fg"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_u81vp")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mqp4i"]
+noise_type = 3
+seed = 2575
+frequency = 0.0084
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_asux5"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_mqp4i")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vg0d6"]
+seed = 2475
+offset = Vector3(-50.82, -74.65, 0)
+fractal_type = 2
+fractal_lacunarity = 0.0
+fractal_weighted_strength = 0.86
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 35.545
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hb5kt"]
+resource_name = "Wave Noise"
+seamless = true
+noise = SubResource("FastNoiseLite_vg0d6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hb5kt"]
+render_priority = 0
+shader = ExtResource("6_asux5")
+shader_parameter/albedo = Color(0.0314664, 0.122863, 0.190393, 1)
+shader_parameter/albedo2 = Color(0.0754, 0.264963, 0.29, 1)
+shader_parameter/color_deep = Color(0.162454, 0.0796625, 0.187638, 1)
+shader_parameter/color_shallow = Color(0.8, 0.3248, 0.152, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.02
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_6u7fg")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_asux5")
+shader_parameter/wave = SubResource("NoiseTexture2D_hb5kt")
+shader_parameter/wave_time = 0.0
+shader_parameter/wave_direction = Vector2(0, 0.3)
+shader_parameter/wave_2_direction = Vector2(0, 0.3)
+shader_parameter/time_scale = 0.045
+shader_parameter/wave_speed = 2.0
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.76
+shader_parameter/beers_law = 2.0
+shader_parameter/depth_offset = -0.75
+shader_parameter/edge_scale = 0.1
+shader_parameter/near = 0.5
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8hdiv"]
+material = SubResource("ShaderMaterial_hb5kt")
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="Gradient" id="Gradient_hb5kt"]
+interpolation_mode = 1
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c3bvi"]
+gradient = SubResource("Gradient_hb5kt")
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8eo8"]
+render_priority = 0
+shader = ExtResource("8_hb5kt")
+shader_parameter/albedo = Color(0.0314664, 0.122863, 0.190393, 1)
+shader_parameter/albedo2 = Color(0.553201, 0.242041, 0.641326, 1)
+shader_parameter/color_deep = Color(0.073362, 0.262732, 0.227361, 1)
+shader_parameter/color_shallow = Color(0.63, 0.29589, 0.1638, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.02
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_6u7fg")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_asux5")
+shader_parameter/wave = SubResource("GradientTexture2D_c3bvi")
+shader_parameter/wave_time = 0.0
+shader_parameter/wave_direction = Vector2(0.375, 0)
+shader_parameter/wave_2_direction = Vector2(0.1, 0.2)
+shader_parameter/time_scale = 0.2
+shader_parameter/wave_speed = 0.225
+shader_parameter/noise_scale = 42.775
+shader_parameter/height_scale = 8.44
+shader_parameter/beers_law = 0.595
+shader_parameter/depth_offset = -0.855
+shader_parameter/wave_frequency_1 = 0.704
+shader_parameter/wave_frequency_2 = 0.319
+shader_parameter/wave_frequency_3 = 0.1
+shader_parameter/wave_amplitude_1 = 1.0
+shader_parameter/wave_amplitude_2 = 0.392
+shader_parameter/wave_amplitude_3 = 0.288
+shader_parameter/wave_steepness = 0.205
+shader_parameter/smoothness = 2.517
+shader_parameter/edge_scale = 0.1
+shader_parameter/near = 0.5
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(1, 0.4, 0.4, 1)
+shader_parameter/water_alpha = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c3bvi"]
+material = SubResource("ShaderMaterial_g8eo8")
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
+
+[node name="Wavetest" type="Node3D"]
+script = ExtResource("1_hb5kt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6lwxi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(0.734329, 0.547409, -0.401378, 0, 0.591311, 0.806444, 0.678793, -0.592195, 0.434217, -8.37983, 18.5459, 9.75255)
+
+[node name="Camera3D3" type="Camera3D" parent="."]
+transform = Transform3D(0.697789, -0.476974, 0.534403, 0, 0.746057, 0.665882, -0.716303, -0.464645, 0.52059, 15.1161, 22.4547, 16.9253)
+
+[node name="Camera3D4" type="Camera3D" parent="."]
+transform = Transform3D(-0.988361, 0.0387323, -0.147115, 0, 0.967046, 0.254602, 0.152128, 0.251639, -0.95579, -15.2164, 1.90019, -44.6107)
+
+[node name="Camera3D5" type="Camera3D" parent="."]
+transform = Transform3D(-0.952378, -0.228211, 0.202229, 0, 0.663217, 0.748427, -0.304921, 0.712786, -0.631633, 10.797, 22.1824, -31.5465)
+
+[node name="sdf" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.336946, -0.153505, 0)
+visible = false
+mesh = SubResource("PlaneMesh_8hdiv")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_c3bvi")
+script = ExtResource("7_asux5")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0)
+
+[node name="RigidBody3D2" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9.80993, 14)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D4" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9.80993, 14)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D5" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9.80993, 14)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D9" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9.81, 14)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D3" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9.80993, 14)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D6" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.80993, 14)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D7" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 9.80993, 14)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D10" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 9.81, 14)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D8" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9.80993, 9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D11" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9.80993, 9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D12" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9.80993, 9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D13" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9.81, 9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D14" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9.80993, 9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D15" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.80993, 9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D16" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 9.80993, 9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D17" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 9.81, 9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D18" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9.80993, 5)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D19" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9.80993, 5)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D20" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9.80993, 5)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D21" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9.81, 5)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D22" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9.80993, 5)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D23" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.80993, 5)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D24" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 9.80993, 5)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D25" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 9.81, 5)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D26" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9.80993, 0)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D27" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9.80993, 0)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D28" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9.80993, 0)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D29" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9.81, 0)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D30" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9.80993, 0)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D31" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.80993, 0)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D32" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 9.80993, 0)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D33" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 9.81, 0)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D34" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9.80993, -4)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D35" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9.80993, -4)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D36" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9.80993, -4)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D37" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9.81, -4)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D38" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9.80993, -4)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D39" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.80993, -4)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D40" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 9.80993, -4)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D41" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 9.81, -4)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D42" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9.80993, -9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D43" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9.80993, -9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D44" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9.80993, -9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D45" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9.81, -9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D46" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9.80993, -9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D47" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.80993, -9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D48" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 9.80993, -9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D49" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 9.81, -9)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D50" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9.80993, -13)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D51" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9.80993, -13)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D52" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9.80993, -13)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D53" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9.81, -13)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D54" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9.80993, -13)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D55" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.80993, -13)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D56" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 9.80993, -13)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D57" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 9.81, -13)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D58" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9.80993, -18)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D59" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9.80993, -18)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D60" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9.80993, -18)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D61" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9.81, -18)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D62" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9.80993, -18)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D63" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.80993, -18)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D64" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 9.80993, -18)
+water = NodePath("../../Water")
+
+[node name="RigidBody3D65" parent="Node3D" node_paths=PackedStringArray("water") instance=ExtResource("9_hb5kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 9.81, -18)
+water = NodePath("../../Water")

@@ -2,7 +2,7 @@ extends Node
 
 class_name BaseView
 
-enum screens {game_over,menu,play,battle,summary,}
+enum screens {game_over,menu,intro,play,summary,}
 
 signal did_prepare_to_hide
 signal did_hide

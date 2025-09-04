@@ -3,7 +3,10 @@ extends Node
 #const play_scene = preload("res://core_campaing/main_campaing/campaign.tscn") as PackedScene
 #const battle_scene = preload("res://core_battle/battle_escenario/fight_scene.tscn") as PackedScene
 
+const true_scenario = preload("res://play_scenarios/intro/intro_scenario.tscn")
+const intro_scenario = preload("res://play_scenarios/intro/intro_scenario.tscn")
 const menu_scene = preload("res://main_menu/main_menu.tscn")
+
 @export var play_scene :  PackedScene
 @export var battle_scene :  PackedScene
 
@@ -24,11 +27,9 @@ var mission_data : Dictionary = {
 		}
 var game_data :Dictionary
 
-@onready var screen_scenes := {
-	BaseView.screens.game_over: game_over_scene,
+@onready var screen_scenes : Dictionary= {
 	BaseView.screens.menu: menu_scene,
-	BaseView.screens.play: play_scene,
-	BaseView.screens.battle: battle_scene
+	BaseView.screens.intro: intro_scenario,
 	}
 
 func _ready():

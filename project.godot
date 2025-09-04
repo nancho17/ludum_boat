@@ -23,6 +23,11 @@ window/size/viewport_height=800
 [file_customization]
 
 folder_colors={
+"res://general/": "orange",
 "res://main_menu/": "red",
-"res://themes/": "orange"
+"res://play_scenarios/": "yellow"
 }
+
+[gui]
+
+theme/custom="uid://c4nw1nrfaf1ad"
