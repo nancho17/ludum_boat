@@ -301,7 +301,7 @@ transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.7422
 mesh = SubResource("TextMesh_wtpit")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 11, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 11, 0.120743)
 mass = 30.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
@@ -312,7 +312,7 @@ mesh = SubResource("SphereMesh_afsxu")
 surface_material_override/0 = SubResource("ShaderMaterial_wtxso")
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 12, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 12, -1.77172)
 mass = 20.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]

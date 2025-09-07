@@ -14,6 +14,8 @@ func _ready() -> void:
 	engine_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 	print(engine_gravity)
 	pin_joint_3d.set_node_b(theseus_body.get_path())
+	await water.ready
+	#set_physics_process(true)
 
 
 func _physics_process(delta: float) -> void:

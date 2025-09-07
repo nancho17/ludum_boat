@@ -8,12 +8,14 @@ var time :float
 var noise_scale:float
 var wave_speed :float
 var height_scale: float
+var el_noise_texture : NoiseTexture2D
 
 
 func _ready() -> void: 
 	material = mesh.surface_get_material(0)
-	var el_noise_texture : NoiseTexture2D = material.get_shader_parameter("wave")#shader_parameter/wave
-	await el_noise_texture.changed
+
+	el_noise_texture = material.get_shader_parameter("wave")#shader_parameter/wave
+
 	noise = el_noise_texture.get_image()
 	#var el_fast_noise_texture : FastNoiseLite = material.get_shader_parameter("wave").noise#shader_parameter/wave
 	#noise  = el_fast_noise_texture.get_image(512, 512,false,false,false)
