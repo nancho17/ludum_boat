@@ -1,38 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://cestmq8cb5j4n"]
+[gd_scene load_steps=27 format=3 uid="uid://cestmq8cb5j4n"]
 
 [ext_resource type="Script" uid="uid://bq5edjwfa2iyy" path="res://play_scenarios/wave_test.gd" id="1_kwm51"]
-[ext_resource type="Texture2D" uid="uid://ds88uk8tjoyv0" path="res://play_scenarios/intro/kloppenheim_06_puresky_1k.hdr" id="2_jsjb0"]
+[ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_jsjb0"]
 [ext_resource type="Shader" uid="uid://bvogrwwn7gsyx" path="res://play_scenarios/water_wave.gdshader" id="2_v5huk"]
 [ext_resource type="Script" uid="uid://ybya1hglhid" path="res://play_scenarios/water.gd" id="3_jsjb0"]
 [ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="4_kpapv"]
 [ext_resource type="PackedScene" uid="uid://cvvgqjpep4k3t" path="res://play_scenarios/boat/cube_float.tscn" id="5_vhj5a"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kpapv"]
-panorama = ExtResource("2_jsjb0")
-
-[sub_resource type="Sky" id="Sky_v5huk"]
-sky_material = SubResource("PanoramaSkyMaterial_kpapv")
-
-[sub_resource type="Environment" id="Environment_jsjb0"]
-background_mode = 2
-sky = SubResource("Sky_v5huk")
-sky_rotation = Vector3(0, 1.8867, 0)
-ambient_light_source = 3
-ambient_light_color = Color(0.74902, 0.74902, 0.74902, 1)
-ambient_light_sky_contribution = 0.31
-ambient_light_energy = 0.92
-reflected_light_source = 2
-tonemap_mode = 2
-tonemap_white = 2.67
-glow_enabled = true
-glow_levels/3 = 0.95
-glow_normalized = true
-glow_intensity = 1.35
-glow_strength = 1.35
-glow_bloom = 0.53
-glow_blend_mode = 4
-adjustment_enabled = true
-adjustment_contrast = 1.2
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_kwm51"]
 auto_exposure_enabled = true
@@ -206,7 +179,7 @@ shader_parameter/in_dashed_count_y = 6.0
 script = ExtResource("1_kwm51")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_jsjb0")
+environment = ExtResource("2_jsjb0")
 camera_attributes = SubResource("CameraAttributesPractical_kwm51")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
