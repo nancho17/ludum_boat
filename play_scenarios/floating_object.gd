@@ -1,7 +1,7 @@
 extends RigidBody3D
 
-@export var water_drag : float = 0.05
-@export var water_drag_angular : float = 0.05
+@export var water_drag : float = 0.100
+@export var water_drag_angular : float = 0.100
 @export var water: MeshInstance3D 
 @export var theseus_body: PhysicsBody3D 
 @onready var pin_joint_3d: PinJoint3D = $PinJoint3D

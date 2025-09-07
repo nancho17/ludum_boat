@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://b2i1ye6a8vi5f"]
+
+[ext_resource type="Script" uid="uid://bc5ebc3r0qeoa" path="res://arpoon/arpoon.gd" id="1_svd1h"]
+[ext_resource type="PackedScene" uid="uid://bl15wqyevkigd" path="res://arpoon/arpoon_projectile.tscn" id="2_mmv02"]
+[ext_resource type="Script" uid="uid://dyw0kxod3i1ej" path="res://arpoon/instruction_text.gd" id="2_xxe20"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xxe20"]
+albedo_color = Color(0.226707, 0.226707, 0.226707, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mmv02"]
+size = Vector3(0.25, 1, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rhxu"]
+albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cgv2x"]
+size = Vector3(1, 0.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_13rav"]
+size = Vector3(3, 2, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmv02"]
+albedo_color = Color(0.912962, 0.258457, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_svd1h"]
+text = "E to use"
+
+[node name="Arpoon" type="Node3D"]
+script = ExtResource("1_svd1h")
+launch_force = 100.0
+harpoon_scene = ExtResource("2_mmv02")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_xxe20")
+mesh = SubResource("BoxMesh_mmv02")
+
+[node name="PivotYaw" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PivotRoll" type="Node3D" parent="PivotYaw"]
+
+[node name="Cannon" type="MeshInstance3D" parent="PivotYaw/PivotRoll"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.2, 0)
+material_override = SubResource("StandardMaterial3D_4rhxu")
+mesh = SubResource("BoxMesh_cgv2x")
+skeleton = NodePath("../../..")
+
+[node name="Camera3D" type="Camera3D" parent="PivotYaw/PivotRoll"]
+transform = Transform3D(1.15185e-08, 0.258819, -0.965926, -3.08639e-09, 0.965926, 0.258819, 1, 0, 1.19249e-08, -0.853302, 1.89959, 0)
+
+[node name="Marker3D" type="Marker3D" parent="PivotYaw/PivotRoll"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_13rav")
+
+[node name="InstructionText" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64496, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_mmv02")
+mesh = SubResource("TextMesh_svd1h")
+script = ExtResource("2_xxe20")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

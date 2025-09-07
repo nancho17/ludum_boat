@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl15wqyevkigd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w76ta"]
+size = Vector3(1, 0.15, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5vksn"]
+size = Vector3(1, 0.15, 0.15)
+
+[node name="ArpoonProjectile" type="RigidBody3D"]
+sleeping = true
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_w76ta")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5vksn")
