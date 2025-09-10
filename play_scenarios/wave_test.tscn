@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://bvogrwwn7gsyx" path="res://play_scenarios/water_wave.gdshader" id="6_asux5"]
 [ext_resource type="Script" uid="uid://ybya1hglhid" path="res://play_scenarios/water.gd" id="7_asux5"]
 [ext_resource type="Shader" uid="uid://d3b8h3ifjfexq" path="res://play_scenarios/water_wave_freq_capp.gdshader" id="8_hb5kt"]
-[ext_resource type="PackedScene" uid="uid://cvvgqjpep4k3t" path="res://play_scenarios/boat/cube_float.tscn" id="9_hb5kt"]
+[ext_resource type="PackedScene" uid="uid://cvvgqjpep4k3t" path="res://general/game_boats/boat/cube_float.tscn" id="9_hb5kt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mhlc"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)

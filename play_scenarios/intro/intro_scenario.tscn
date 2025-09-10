@@ -1,11 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://cestmq8cb5j4n"]
+[gd_scene load_steps=29 format=3 uid="uid://cestmq8cb5j4n"]
 
 [ext_resource type="Script" uid="uid://bq5edjwfa2iyy" path="res://play_scenarios/wave_test.gd" id="1_kwm51"]
 [ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_jsjb0"]
 [ext_resource type="Shader" uid="uid://bvogrwwn7gsyx" path="res://play_scenarios/water_wave.gdshader" id="2_v5huk"]
 [ext_resource type="Script" uid="uid://ybya1hglhid" path="res://play_scenarios/water.gd" id="3_jsjb0"]
 [ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="4_kpapv"]
-[ext_resource type="PackedScene" uid="uid://boaovgil67cnt" path="res://play_scenarios/boat/playable_boat.tscn" id="5_v5huk"]
+[ext_resource type="PackedScene" uid="uid://boaovgil67cnt" path="res://general/game_boats/boat/playable_boat.tscn" id="5_v5huk"]
+[ext_resource type="PackedScene" uid="uid://2ojuy8hh3ouo" path="res://general/game_char/game_char.tscn" id="7_jsjb0"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_kwm51"]
 auto_exposure_enabled = true
@@ -15,6 +16,8 @@ dof_blur_far_transition = 3784.35
 dof_blur_amount = 0.2
 auto_exposure_min_sensitivity = 150.0
 auto_exposure_max_sensitivity = 422.2
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_jsjb0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_u81vp"]
 frequency = 0.005
@@ -91,6 +94,30 @@ pixel_size = 0.231
 
 [sub_resource type="SphereMesh" id="SphereMesh_afsxu"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jsjb0"]
+render_priority = 0
+shader = ExtResource("4_kpapv")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.397833, 0.182, 0.7, 1)
+shader_parameter/background_color_two = Color(0.3127, 0.59, 0.0354, 1)
+shader_parameter/grid_color = Color(0.792157, 0.12549, 0.254902, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wtxso"]
 render_priority = 0
 shader = ExtResource("4_kpapv")
@@ -145,6 +172,12 @@ shader_parameter/in_dashed_scale_y = 0.3
 shader_parameter/in_dashed_count_x = 6.0
 shader_parameter/in_dashed_count_y = 6.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsjb0"]
+size = Vector3(5, 2, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kpapv"]
+size = Vector3(5, 2, 5)
+
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_kwm51")
 
@@ -155,6 +188,14 @@ camera_attributes = SubResource("CameraAttributesPractical_kwm51")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
+
+[node name="StaticWordlLimit" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0)
+metadata/_edit_lock_ = true
+
+[node name="CollisionWorldLimit" type="CollisionShape3D" parent="StaticWordlLimit"]
+shape = SubResource("WorldBoundaryShape3D_jsjb0")
+debug_color = Color(0.993072, 0.0142884, 0.220967, 0.42)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -193,20 +234,23 @@ script = ExtResource("3_jsjb0")
 metadata/_edit_lock_ = true
 
 [node name="PlayableBoat" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595436, 7, -0.643199)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 2.70827, -0.643)
 water_boat = NodePath("../Water")
 
 [node name="PlayableBoat2" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9391, 7, -33.1977)
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9391, 18.7944, -33.1977)
 water_boat = NodePath("../Water")
 boat_mesh = 1
 
 [node name="PlayableBoat3" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
+process_mode = 4
 transform = Transform3D(0.788623, 0, 0.614877, 0, 1, 0, -0.614877, 0, 0.788623, -17.2241, 7, -31.0947)
 water_boat = NodePath("../Water")
 boat_mesh = 2
 
 [node name="PlayableBoat4" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
+process_mode = 4
 transform = Transform3D(-0.492059, 0, 0.870562, 0, 1, 0, -0.870562, 0, -0.492059, 32.6915, 7, 18.2755)
 water_boat = NodePath("../Water")
 boat_mesh = 3
@@ -220,19 +264,25 @@ transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.7422
 mesh = SubResource("TextMesh_wtpit")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 11, 0.120743)
-mass = 30.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 22.7944, -4.44948)
+collision_layer = 2
+collision_mask = 3
+mass = 218.835
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("SphereShape3D_wtpit")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("SphereMesh_afsxu")
-surface_material_override/0 = SubResource("ShaderMaterial_wtxso")
+surface_material_override/0 = SubResource("ShaderMaterial_jsjb0")
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 12, -1.77172)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 23.7944, -1.77172)
+collision_layer = 2
+collision_mask = 3
 mass = 20.0
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
 shape = SubResource("SphereShape3D_wtpit")
@@ -242,8 +292,11 @@ mesh = SubResource("SphereMesh_afsxu")
 surface_material_override/0 = SubResource("ShaderMaterial_wtxso")
 
 [node name="RigidBody3D3" type="RigidBody3D" parent="."]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3, 11, 0)
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -4.10647, 11.5307, 0)
+collision_layer = 2
+collision_mask = 3
 mass = 10.0
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
 shape = SubResource("BoxShape3D_wtpit")
@@ -252,3 +305,15 @@ debug_color = Color(0, 0.595, 0.7, 1)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
 mesh = SubResource("BoxMesh_afsxu")
 surface_material_override/0 = SubResource("ShaderMaterial_cpoit")
+
+[node name="GameChar" parent="." instance=ExtResource("7_jsjb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.7746, -0.34)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.37226, 10.3349)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_jsjb0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_kpapv")

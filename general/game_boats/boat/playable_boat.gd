@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var floating_bodies: Node3D = $FloatingBodies
 @export var water_boat : MeshInstance3D
+@onready var boat_camera: Camera3D = $Boat/BoatCamera
 
 enum PlayBoat {SQUARE, VARIABLE,SIMPLE,FISH}
 @export var boat_mesh: PlayBoat = PlayBoat.SQUARE
@@ -14,6 +15,9 @@ enum PlayBoat {SQUARE, VARIABLE,SIMPLE,FISH}
 	PlayBoat.VARIABLE:boat_var,
 	PlayBoat.SIMPLE:boat_sim,
 	PlayBoat.FISH:tug_boat}
+
+func get_ship_camera():
+	return boat_camera
 
 func _ready() -> void:
 	var boat_mesh : Node3D = boat_dict[boat_mesh]

@@ -11,13 +11,17 @@ extends BaseView
 var cameras :Array
 var cameras_qty : int
 var current_int : int = 0
+@onready var playable_boat: Node3D = $PlayableBoat
+@onready var game_char: Node3D = $GameChar
 
 func _ready() -> void:
 	cameras = [
 		camera_3d_2,
+		game_char.get_player_camera(),
 		camera_3d_3,
 		camera_3d_4,
-		camera_3d_5
+		camera_3d_5,
+		playable_boat.get_ship_camera()
 		]
 	cameras_qty=cameras.size()
 

@@ -1,14 +1,46 @@
-[gd_scene load_steps=16 format=4 uid="uid://boaovgil67cnt"]
+[gd_scene load_steps=19 format=4 uid="uid://boaovgil67cnt"]
 
 [ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="1_j61xf"]
-[ext_resource type="Script" uid="uid://din2fiiuks4ir" path="res://play_scenarios/boat/playable_boat.gd" id="1_l7fmw"]
-[ext_resource type="PackedScene" uid="uid://cvvgqjpep4k3t" path="res://play_scenarios/boat/cube_float.tscn" id="2_l7fmw"]
+[ext_resource type="Script" uid="uid://din2fiiuks4ir" path="res://general/game_boats/boat/playable_boat.gd" id="1_l7fmw"]
+[ext_resource type="PackedScene" uid="uid://cvvgqjpep4k3t" path="res://general/game_boats/boat/cube_float.tscn" id="2_l7fmw"]
 [ext_resource type="Texture2D" uid="uid://50bsab2vji3f" path="res://general/game_boats/BoatVariant_Boat texture 2.png" id="3_solch"]
 [ext_resource type="Texture2D" uid="uid://mjviycq6csfk" path="res://general/game_boats/Boat_Tugboat_BaseColor.png" id="4_3fshx"]
 [ext_resource type="PackedScene" uid="uid://dno2ec004jbgq" path="res://general/game_boats/TugBoat.glb" id="5_aqra3"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l1eti"]
+render_priority = 0
+shader = ExtResource("1_j61xf")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.790845, 0.99, 0.2871, 1)
+shader_parameter/background_color_two = Color(0.242627, 0.1054, 0.62, 1)
+shader_parameter/grid_color = Color(0.823186, 0.274305, 0.409413, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_ctn0h"]
+material = SubResource("ShaderMaterial_l1eti")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xct3n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xvr5u"]
+size = Vector3(15, 2, 10)
+
 [sub_resource type="BoxMesh" id="BoxMesh_wtpit"]
-size = Vector3(10, 2, 5)
+size = Vector3(15, 2, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_afsxu"]
 render_priority = 0
@@ -114,17 +146,36 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_22u7h")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xvr5u"]
-size = Vector3(10, 2, 5)
-
 [node name="PlayableBoat" type="Node3D"]
 script = ExtResource("1_l7fmw")
 
+[node name="Anchor" type="StaticBody3D" parent="."]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -1, 4)
+
+[node name="MeshIndex" type="MeshInstance3D" parent="Anchor"]
+mesh = SubResource("PrismMesh_ctn0h")
+skeleton = NodePath("../../FloatingBodies")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Anchor"]
+shape = SubResource("SphereShape3D_xct3n")
+debug_color = Color(0.627625, 0.0825, 0.75, 0.756863)
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Anchor"]
+node_a = NodePath("../../Boat")
+node_b = NodePath("..")
+
 [node name="Boat" type="RigidBody3D" parent="."]
-mass = 10.0
+mass = 500.0
+
+[node name="BoatCamera" type="Camera3D" parent="Boat"]
+transform = Transform3D(0.869081, -0.425774, 0.251824, 0, 0.509074, 0.860723, -0.49467, -0.748038, 0.442426, 4.32183, 10.2833, 5.55996)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boat"]
+shape = SubResource("BoxShape3D_xvr5u")
+debug_color = Color(0, 0.7, 0.385, 1)
 
 [node name="Square" type="MeshInstance3D" parent="Boat"]
-visible = false
 mesh = SubResource("BoxMesh_wtpit")
 surface_material_override/0 = SubResource("ShaderMaterial_afsxu")
 
@@ -143,32 +194,36 @@ skeleton = NodePath("")
 transform = Transform3D(4.805, 0, 0, 0, 4.805, 0, 0, 0, 4.805, -1, 3, 0)
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boat"]
-shape = SubResource("BoxShape3D_xvr5u")
-debug_color = Color(0, 0.7, 0.385, 1)
-
 [node name="FloatingBodies" type="Node3D" parent="."]
 
-[node name="RigidBody3D2" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, -3)
+[node name="RigidBody3D11" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, -5)
 theseus_body = NodePath("../../Boat")
 
 [node name="RigidBody3D4" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.14776)
 theseus_body = NodePath("../../Boat")
 
 [node name="RigidBody3D6" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, -5)
 theseus_body = NodePath("../../Boat")
 
 [node name="RigidBody3D8" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 5)
 theseus_body = NodePath("../../Boat")
 
 [node name="RigidBody3D5" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 5)
 theseus_body = NodePath("../../Boat")
 
 [node name="RigidBody3D7" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 5)
+theseus_body = NodePath("../../Boat")
+
+[node name="RigidBody3D9" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -1, 0)
+theseus_body = NodePath("../../Boat")
+
+[node name="RigidBody3D10" parent="FloatingBodies" node_paths=PackedStringArray("theseus_body") instance=ExtResource("2_l7fmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -1, 0)
 theseus_body = NodePath("../../Boat")
