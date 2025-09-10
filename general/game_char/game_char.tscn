@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ojuy8hh3ouo"]
+
+[ext_resource type="Script" uid="uid://c2g6hf3jm1vyq" path="res://general/game_char/game_char.gd" id="1_kua1d"]
+[ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_m66ig"]
+
+[node name="GameChar" type="Node3D"]
+script = ExtResource("1_kua1d")
+
+[node name="Character" parent="." instance=ExtResource("1_m66ig")]

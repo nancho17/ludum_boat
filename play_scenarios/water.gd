@@ -24,7 +24,7 @@ func _ready() -> void:
 	noise_scale = material.get_shader_parameter("noise_scale")#shader_parameter/noise_scale
 	wave_speed = material.get_shader_parameter("wave_speed")#shader_parameter/wave_speed
 	height_scale = material.get_shader_parameter("height_scale")#shader_parameter/height_scale
-	set_physics_process(true)
+	print("set_physics_process(true)")
 #	noise.get_mipmap_offset()	
 	
 func _physics_process(delta: float) -> void:

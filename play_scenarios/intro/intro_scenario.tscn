@@ -1,11 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://cestmq8cb5j4n"]
+[gd_scene load_steps=24 format=3 uid="uid://cestmq8cb5j4n"]
 
 [ext_resource type="Script" uid="uid://bq5edjwfa2iyy" path="res://play_scenarios/wave_test.gd" id="1_kwm51"]
 [ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_jsjb0"]
 [ext_resource type="Shader" uid="uid://bvogrwwn7gsyx" path="res://play_scenarios/water_wave.gdshader" id="2_v5huk"]
 [ext_resource type="Script" uid="uid://ybya1hglhid" path="res://play_scenarios/water.gd" id="3_jsjb0"]
 [ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="4_kpapv"]
-[ext_resource type="PackedScene" uid="uid://cvvgqjpep4k3t" path="res://play_scenarios/boat/cube_float.tscn" id="5_vhj5a"]
+[ext_resource type="PackedScene" uid="uid://boaovgil67cnt" path="res://play_scenarios/boat/playable_boat.tscn" id="5_v5huk"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_kwm51"]
 auto_exposure_enabled = true
@@ -78,36 +78,6 @@ material = SubResource("ShaderMaterial_g8eo8")
 size = Vector2(500, 500)
 subdivide_width = 500
 subdivide_depth = 500
-
-[sub_resource type="BoxMesh" id="BoxMesh_wtpit"]
-size = Vector3(10, 2, 5)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_afsxu"]
-render_priority = 0
-shader = ExtResource("4_kpapv")
-shader_parameter/subdivisions = 32.0
-shader_parameter/grid_width = 0.02
-shader_parameter/background_color = Color(0.2, 0.2, 0.2, 1)
-shader_parameter/background_color_two = Color(0.1, 0.1, 0.1, 1)
-shader_parameter/grid_color = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/dashed_scale_x = 0.02
-shader_parameter/dashed_scale_y = 0.02
-shader_parameter/dashed_count_x = 1.0
-shader_parameter/dashed_count_y = 1.0
-shader_parameter/point_width = 0.021
-shader_parameter/point_color = Color(0, 0, 0, 1)
-shader_parameter/point_scale_x = 0.05
-shader_parameter/point_scale_y = 0.05
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_subdivisions = 6.0
-shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
-shader_parameter/in_dashed_scale_x = 0.3
-shader_parameter/in_dashed_scale_y = 0.3
-shader_parameter/in_dashed_count_x = 6.0
-shader_parameter/in_dashed_count_y = 6.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xvr5u"]
-size = Vector3(10, 2, 5)
 
 [sub_resource type="TextMesh" id="TextMesh_xvr5u"]
 text = "Z"
@@ -205,65 +175,41 @@ layout_mode = 2
 expand_mode = 1
 
 [node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(0.734329, 0.547409, -0.401378, 0, 0.591311, 0.806444, 0.678793, -0.592195, 0.434217, -8.37983, 18.5459, 9.75255)
+transform = Transform3D(0.779884, 0.489853, -0.389647, 0, 0.622515, 0.782608, 0.625924, -0.610344, 0.485489, -5.44055, 18.5145, 7.40572)
 
 [node name="Camera3D3" type="Camera3D" parent="."]
 transform = Transform3D(-0.991777, -0.0182625, 0.126664, 0, 0.989765, 0.142705, -0.127974, 0.141532, -0.981627, 0.851783, 4.67439, -3.61186)
 
 [node name="Camera3D4" type="Camera3D" parent="."]
-transform = Transform3D(0.95578, 0.18389, -0.229496, 0, 0.780383, 0.625303, 0.294082, -0.597652, 0.745874, -1.85082, 4.40034, 8.50055)
+transform = Transform3D(-0.329692, 0.914017, -0.236381, 0, 0.25038, 0.968148, 0.944089, 0.319191, -0.0825483, -3.13966, 21.3027, -1.12396)
 
 [node name="Camera3D5" type="Camera3D" parent="."]
-transform = Transform3D(0.223205, 0.657974, -0.719201, 0, 0.737815, 0.675003, 0.974772, -0.150664, 0.164684, -9.29233, 9.07928, 6.30538)
+transform = Transform3D(0.642787, 0.2494, -0.72431, 0, 0.945519, 0.325568, 0.766045, -0.209271, 0.607767, -14.8729, 11.9579, 9.66285)
 
 [node name="Water" type="MeshInstance3D" parent="."]
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_c3bvi")
 script = ExtResource("3_jsjb0")
+metadata/_edit_lock_ = true
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+[node name="PlayableBoat" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595436, 7, -0.643199)
+water_boat = NodePath("../Water")
 
-[node name="Boat" type="RigidBody3D" parent="Node3D"]
-mass = 10.0
+[node name="PlayableBoat2" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9391, 7, -33.1977)
+water_boat = NodePath("../Water")
+boat_mesh = 1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Boat"]
-mesh = SubResource("BoxMesh_wtpit")
-surface_material_override/0 = SubResource("ShaderMaterial_afsxu")
+[node name="PlayableBoat3" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
+transform = Transform3D(0.788623, 0, 0.614877, 0, 1, 0, -0.614877, 0, 0.788623, -17.2241, 7, -31.0947)
+water_boat = NodePath("../Water")
+boat_mesh = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Boat"]
-shape = SubResource("BoxShape3D_xvr5u")
-debug_color = Color(0, 0.7, 0.385, 1)
-
-[node name="RigidBody3D2" parent="Node3D" node_paths=PackedStringArray("water", "theseus_body") instance=ExtResource("5_vhj5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, -3)
-water = NodePath("../../Water")
-theseus_body = NodePath("../Boat")
-
-[node name="RigidBody3D4" parent="Node3D" node_paths=PackedStringArray("water", "theseus_body") instance=ExtResource("5_vhj5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -3)
-water = NodePath("../../Water")
-theseus_body = NodePath("../Boat")
-
-[node name="RigidBody3D6" parent="Node3D" node_paths=PackedStringArray("water", "theseus_body") instance=ExtResource("5_vhj5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, -3)
-water = NodePath("../../Water")
-theseus_body = NodePath("../Boat")
-
-[node name="RigidBody3D7" parent="Node3D" node_paths=PackedStringArray("water", "theseus_body") instance=ExtResource("5_vhj5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 3)
-water = NodePath("../../Water")
-theseus_body = NodePath("../Boat")
-
-[node name="RigidBody3D5" parent="Node3D" node_paths=PackedStringArray("water", "theseus_body") instance=ExtResource("5_vhj5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 3)
-water = NodePath("../../Water")
-theseus_body = NodePath("../Boat")
-
-[node name="RigidBody3D8" parent="Node3D" node_paths=PackedStringArray("water", "theseus_body") instance=ExtResource("5_vhj5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 3)
-water = NodePath("../../Water")
-theseus_body = NodePath("../Boat")
+[node name="PlayableBoat4" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
+transform = Transform3D(-0.492059, 0, 0.870562, 0, 1, 0, -0.870562, 0, -0.492059, 32.6915, 7, 18.2755)
+water_boat = NodePath("../Water")
+boat_mesh = 3
 
 [node name="zeta" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 3, 11)
