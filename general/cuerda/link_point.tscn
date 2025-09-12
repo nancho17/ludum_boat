@@ -1,11 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://dng165oanwx38"]
 
-[ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://waves/grid_protos.gdshader" id="1_8rtxi"]
+[ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="1_8rtxi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8rtxi"]
 rough = true
-bounce = 0.1
 absorbent = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_a1blu"]
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trqrq"]
 render_priority = 0
@@ -31,25 +33,21 @@ shader_parameter/in_dashed_scale_y = 0.3
 shader_parameter/in_dashed_count_x = 6.0
 shader_parameter/in_dashed_count_y = 6.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_7mnbm"]
-material = SubResource("ShaderMaterial_trqrq")
-radius = 0.04
-height = 0.1
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8rtxi"]
-margin = 0.16
-size = Vector3(0.08, 0.08, 0.08)
+[sub_resource type="SphereShape3D" id="SphereShape3D_a1blu"]
+radius = 0.1
 
 [node name="LinkPoint" type="RigidBody3D"]
-mass = 0.5
+mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_8rtxi")
-angular_damp = 1.984
+linear_damp = 5.0
+angular_damp = 40.0
 
 [node name="MeshIndex" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_7mnbm")
+mesh = SubResource("BoxMesh_a1blu")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_trqrq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_8rtxi")
+shape = SubResource("SphereShape3D_a1blu")
 debug_color = Color(0.627625, 0.0825, 0.75, 0.756863)
