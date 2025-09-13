@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="1_8rtxi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8rtxi"]
+friction = 0.85
 rough = true
 absorbent = true
 

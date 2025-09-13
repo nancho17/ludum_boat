@@ -26,8 +26,6 @@ func _ready() -> void:
 		initial_dir_vec = (last_link.global_position-first_link.global_position).normalized()
 	
 	if first_link!=null and first_body!=null:
-
-
 		link_point.global_position= first_link.global_position+(initial_dir_vec*link_height/2)
 		var first_point =  PinJoint3D.new()
 		add_child(first_point)
@@ -36,21 +34,21 @@ func _ready() -> void:
 		first_point.global_position = first_link.global_position
 		first_point.node_a = first_body.get_path()
 		first_point.node_b = link_point.get_path()
-		link_array.append(first_point)
-
+		#link_array.append(first_link)
+		#path_3d.curve.add_point(first_link.position)
 
 	cuerda_generation()
 
-
 	if last_link!=null and last_body!=null:
-		link_array.back().global_position= last_link.global_position+(initial_dir_vec*link_height/2)
+		link_array.back().global_position= last_link.global_position-2*(initial_dir_vec*link_height/2)
 
 		var last_point =  PinJoint3D.new()
 		add_child(last_point)
-		last_point.global_position = last_link.global_position
+		last_point.global_position = last_link.global_position-(initial_dir_vec*link_height/2)
 		last_point.node_a = link_array.back().get_path()
 		last_point.node_b = last_body.get_path()
-		link_array.append(last_point)
+		link_array.append(last_link)
+		path_3d.curve.add_point(last_link.position)
 
 func cuerda_generation() -> void:
 	var base_link =  link_point
@@ -60,7 +58,7 @@ func cuerda_generation() -> void:
 		var base_point =  PinJoint3D.new()
 		add_child(base_point)
 		base_point.solver_priority=n+1
-		#base_point.set_param(PinJoint3D.PARAM_BIAS,0.1) 
+		#base_point.set_param(PinJoint3D.PARAM_BIAS,0.8) 
 		#base_point.set_param(PinJoint3D.PARAM_DAMPING,2.0) 
 		#base_point.set_param(PinJoint3D.PARAM_IMPULSE_CLAMP,0.0) 
 
@@ -78,4 +76,4 @@ func cuerda_generation() -> void:
 
 func _process(_delta: float) -> void:
 	for i in link_array.size():
-		path_3d.curve.set_point_position(i,link_array[i].position)
+		path_3d.curve.set_point_position(i,link_array[i].global_position)
