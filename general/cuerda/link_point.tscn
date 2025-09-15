@@ -7,17 +7,20 @@ friction = 0.85
 rough = true
 absorbent = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_a1blu"]
-size = Vector3(0.1, 0.1, 0.1)
+[sub_resource type="SphereMesh" id="SphereMesh_a1blu"]
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trqrq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gc4lr"]
 render_priority = 0
 shader = ExtResource("1_8rtxi")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.02
-shader_parameter/background_color = Color(0.48, 0.35504, 0.1392, 1)
-shader_parameter/background_color_two = Color(0.827451, 0.611765, 0.239216, 1)
-shader_parameter/grid_color = Color(0.1728, 0.235093, 0.64, 1)
+shader_parameter/background_color = Color(0.30058, 0.2356, 0.38, 1)
+shader_parameter/background_color_two = Color(0.984314, 0.85098, 0.101961, 1)
+shader_parameter/grid_color = Color(0.25, 0.1925, 0.213583, 1)
 shader_parameter/dashed_scale_x = 0.02
 shader_parameter/dashed_scale_y = 0.02
 shader_parameter/dashed_count_x = 1.0
@@ -44,10 +47,9 @@ linear_damp = 5.0
 angular_damp = 40.0
 
 [node name="MeshIndex" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_a1blu")
+mesh = SubResource("SphereMesh_a1blu")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_trqrq")
+surface_material_override/0 = SubResource("ShaderMaterial_gc4lr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_a1blu")

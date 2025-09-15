@@ -4,7 +4,9 @@ extends Node3D
 @onready var camera_3d_3: Camera3D = $Camera3D3
 @onready var camera_3d_4: Camera3D = $Camera3D4
 @onready var camera_3d_5: Camera3D = $Camera3D5
-@onready var camera_3d: Camera3D = $Camera3D
+
+@onready var character: CharacterBody3D = $Character
+
 
 var cameras :Array
 var cameras_qty : int
@@ -19,10 +21,11 @@ func _ready() -> void:
 		camera_3d_5,
 		camera_3d_4,
 		camera_3d_3,
-		camera_3d,
+		character.CAMERA,
+
 		]
 	cameras_qty=cameras.size()
-	camera_3d_2.current = true
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("camera_change"):

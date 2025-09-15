@@ -12,7 +12,6 @@ extends Node3D
 
 @onready var link_point: RigidBody3D = $LinkPoint
 @onready var path_3d: Path3D = $Path3D
-@onready var pin_joint_3d: PinJoint3D = $PinJoint3D
 
 const LINK_POINT = preload("res://general/cuerda/link_point.tscn")
 
@@ -27,10 +26,11 @@ func _ready() -> void:
 	
 	if first_link!=null and first_body!=null:
 		link_point.global_position= first_link.global_position+(initial_dir_vec*link_height/2)
+		link_point.look_at(initial_dir_vec)
 		var first_point =  PinJoint3D.new()
 		add_child(first_point)
 		#first_point.exclude_nodes_from_collision = false
-		#first_point.set_param(PinJoint3D.PARAM_BIAS,0.01) 
+		#first_point.set_param(PinJoint3D.PARAM_BIAS,0.01)
 		first_point.global_position = first_link.global_position
 		first_point.node_a = first_body.get_path()
 		first_point.node_b = link_point.get_path()
@@ -41,7 +41,6 @@ func _ready() -> void:
 
 	if last_link!=null and last_body!=null:
 		link_array.back().global_position= last_link.global_position-2*(initial_dir_vec*link_height/2)
-
 		var last_point =  PinJoint3D.new()
 		add_child(last_point)
 		last_point.global_position = last_link.global_position-(initial_dir_vec*link_height/2)
@@ -57,8 +56,8 @@ func cuerda_generation() -> void:
 	for n in range(chained_links_count):
 		var base_point =  PinJoint3D.new()
 		add_child(base_point)
-		base_point.solver_priority=n+1
-		#base_point.set_param(PinJoint3D.PARAM_BIAS,0.8) 
+		#base_point.solver_priority=n+1 # Jolt unsupported
+		#base_point.set_param(PinJoint3D.PARAM_BIAS,0.9) 
 		#base_point.set_param(PinJoint3D.PARAM_DAMPING,2.0) 
 		#base_point.set_param(PinJoint3D.PARAM_IMPULSE_CLAMP,0.0) 
 
@@ -66,8 +65,8 @@ func cuerda_generation() -> void:
 		base_point.node_a = base_link.get_path()
 		var link_point_n: RigidBody3D = LINK_POINT.instantiate()
 		add_child(link_point_n)
-		link_point_n.transform = base_link.transform.orthonormalized()
-		link_point_n.position += initial_dir_vec*link_height
+		link_point_n.position = base_link.position +initial_dir_vec*link_height
+		link_point_n.basis=base_link.basis.orthonormalized()
 		base_point.node_b = link_point_n.get_path()
 		
 		base_link = link_point_n
