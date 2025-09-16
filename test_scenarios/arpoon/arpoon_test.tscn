@@ -1,0 +1,393 @@
+[gd_scene load_steps=33 format=3 uid="uid://1gqtx3wa1145"]
+
+[ext_resource type="Script" uid="uid://c07jjnlm12pie" path="res://test_scenarios/cuerda_attached/cuerda_attached.gd" id="1_y0o0w"]
+[ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_cp7dj"]
+[ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="3_sxxt1"]
+[ext_resource type="PackedScene" uid="uid://dmdrhxqohmn7t" path="res://general/cuerda/cuerda_facil.tscn" id="4_rfvmy"]
+[ext_resource type="PackedScene" uid="uid://b2i1ye6a8vi5f" path="res://test_scenarios/arpoon/arpoon.tscn" id="5_1fkqt"]
+[ext_resource type="PackedScene" uid="uid://bl15wqyevkigd" path="res://test_scenarios/arpoon/arpoon_projectile.tscn" id="6_mvxb6"]
+[ext_resource type="Script" uid="uid://cuhv5bogqm7r" path="res://general/cuerda/phisic_link_body.gd" id="7_mvxb6"]
+[ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="8_w13f8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p2b5u"]
+size = Vector3(4, 1, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u06aa"]
+size = Vector3(4, 1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_se6wv"]
+render_priority = 0
+shader = ExtResource("3_sxxt1")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.064, 0.2, 0.168267, 1)
+shader_parameter/background_color_two = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/grid_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jgyd5"]
+size = Vector2(20, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k11jl"]
+render_priority = 0
+shader = ExtResource("3_sxxt1")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/background_color_two = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/grid_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_u06aa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ubrtp"]
+size = Vector3(1, 5, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_08cdy"]
+height = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1gj3"]
+render_priority = 0
+shader = ExtResource("3_sxxt1")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.283887, 0.0872481, 0.20765, 1)
+shader_parameter/background_color_two = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/grid_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_08cdy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p2b5u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jar1g"]
+render_priority = 0
+shader = ExtResource("3_sxxt1")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.12
+shader_parameter/background_color = Color(0.213232, 0.142733, 0.225715, 1)
+shader_parameter/background_color_two = Color(0.160001, 0.136882, 0.559607, 1)
+shader_parameter/grid_color = Color(0.192755, 0.780383, 0.804946, 1)
+shader_parameter/dashed_scale_x = 0.35
+shader_parameter/dashed_scale_y = 0.37
+shader_parameter/dashed_count_x = 2.0
+shader_parameter/dashed_count_y = 2.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m1gj3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2b5u"]
+render_priority = 0
+shader = ExtResource("3_sxxt1")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.12
+shader_parameter/background_color = Color(0.17937, 0.178939, 0.0812879, 1)
+shader_parameter/background_color_two = Color(0.301255, 0.207168, 0.0357962, 1)
+shader_parameter/grid_color = Color(0.633021, 0.674202, 0.912054, 1)
+shader_parameter/dashed_scale_x = 0.35
+shader_parameter/dashed_scale_y = 0.37
+shader_parameter/dashed_count_x = 2.0
+shader_parameter/dashed_count_y = 2.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_m1gj3"]
+material = SubResource("ShaderMaterial_p2b5u")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_08cdy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p2b5u"]
+radius = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_08cdy"]
+render_priority = 0
+shader = ExtResource("3_sxxt1")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.12
+shader_parameter/background_color = Color(0.248, 0.62, 0.5084, 1)
+shader_parameter/background_color_two = Color(0.71, 0.298318, 0.2059, 1)
+shader_parameter/grid_color = Color(0.201852, 0.265139, 0.439691, 1)
+shader_parameter/dashed_scale_x = 0.35
+shader_parameter/dashed_scale_y = 0.37
+shader_parameter/dashed_count_x = 2.0
+shader_parameter/dashed_count_y = 2.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_jar1g"]
+material = SubResource("ShaderMaterial_08cdy")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w13f8"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_2oqvl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wrro6"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xhak0"]
+albedo_color = Color(0.15, 0.235, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2oqvl"]
+
+[node name="AproonTest" type="Node3D"]
+script = ExtResource("1_y0o0w")
+
+[node name="WorldMisc" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldMisc"]
+environment = ExtResource("2_cp7dj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldMisc"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D2" type="Camera3D" parent="WorldMisc"]
+transform = Transform3D(-0.385056, -0.716763, 0.581363, 0, 0.629935, 0.776648, -0.922893, 0.299053, -0.24256, 4.62775, 5.14959, -2.23943)
+
+[node name="Camera3D3" type="Camera3D" parent="WorldMisc"]
+transform = Transform3D(-0.95502, 0.236047, -0.179494, 0, 0.605294, 0.796002, 0.296541, 0.760198, -0.578068, -0.70066, 3.02419, -1.29052)
+
+[node name="Camera3D4" type="Camera3D" parent="WorldMisc"]
+transform = Transform3D(0.505998, 0.55678, -0.658758, 0, 0.763747, 0.645516, 0.862535, -0.32663, 0.386454, 4.61545, 3.17431, 10.377)
+
+[node name="Camera3D5" type="Camera3D" parent="WorldMisc"]
+transform = Transform3D(0.0279643, -0.661764, 0.74919, 0, 0.749483, 0.662023, -0.999609, -0.018513, 0.0209588, 9.74757, 3.23586, 9.04518)
+
+[node name="StaticsObjects" type="Node3D" parent="."]
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="StaticsObjects"]
+transform = Transform3D(0.869129, 0.279233, 0.40822, -0.286433, 0.957052, -0.0448133, -0.403201, -0.0779791, 0.911783, -9.40216, 0.800158, -7.34996)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticsObjects/StaticBody3D3"]
+shape = SubResource("BoxShape3D_p2b5u")
+debug_color = Color(0.465547, 0.587016, 0.217777, 0.42)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticsObjects/StaticBody3D3"]
+mesh = SubResource("BoxMesh_u06aa")
+surface_material_override/0 = SubResource("ShaderMaterial_se6wv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StaticsObjects"]
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticsObjects/StaticBody3D"]
+mesh = SubResource("PlaneMesh_jgyd5")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_k11jl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticsObjects/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_u06aa")
+
+[node name="MasterPost" type="StaticBody3D" parent="StaticsObjects"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -8.66799, 0, 7.97282)
+metadata/_edit_group_ = true
+
+[node name="MasterSt1" type="Marker3D" parent="StaticsObjects/MasterPost"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -0.120657, 2.34136, 0.795744)
+
+[node name="MasterSt2" type="Marker3D" parent="StaticsObjects/MasterPost"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.580596, 2.34136, -0.0699173)
+
+[node name="MasterSt3" type="Marker3D" parent="StaticsObjects/MasterPost"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.0241771, 2.34136, -0.596773)
+
+[node name="MasterSt4" type="Marker3D" parent="StaticsObjects/MasterPost"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -0.567238, 2.34136, 0.0401251)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticsObjects/MasterPost"]
+shape = SubResource("BoxShape3D_ubrtp")
+debug_color = Color(0.557806, 0.549669, 0.822175, 0.741176)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticsObjects/MasterPost"]
+mesh = SubResource("CapsuleMesh_08cdy")
+surface_material_override/0 = SubResource("ShaderMaterial_m1gj3")
+
+[node name="RigidBodies" type="Node3D" parent="."]
+
+[node name="PupetSquare" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(0.999959, 0, -0.00905813, 0, 1, 0, 0.00905813, 0, 0.999959, -3.86727, 1.6346, 4.04)
+mass = 100.0
+constant_force = Vector3(0, 151.315, 122.515)
+metadata/_edit_group_ = true
+
+[node name="SquareSt" type="Marker3D" parent="RigidBodies/PupetSquare"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293056, -0.65744)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/PupetSquare"]
+shape = SubResource("BoxShape3D_08cdy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/PupetSquare"]
+mesh = SubResource("BoxMesh_p2b5u")
+surface_material_override/0 = SubResource("ShaderMaterial_jar1g")
+
+[node name="PupetBall2" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.88096, 0.884553, -3.44423)
+mass = 70.0
+metadata/_edit_group_ = true
+
+[node name="BallSt2" type="Marker3D" parent="RigidBodies/PupetBall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.503054)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/PupetBall2"]
+shape = SubResource("SphereShape3D_m1gj3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/PupetBall2"]
+mesh = SubResource("SphereMesh_m1gj3")
+
+[node name="PupetBall" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.40996, 1.55976, -0.190707)
+mass = 50.0
+constant_force = Vector3(-33.735, 507.755, 0)
+metadata/_edit_group_ = true
+
+[node name="BallSt1" type="Marker3D" parent="RigidBodies/PupetBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504903, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/PupetBall"]
+shape = SubResource("SphereShape3D_08cdy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/PupetBall"]
+mesh = SubResource("SphereMesh_m1gj3")
+
+[node name="PuppetPlayBall" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.78715, 1.71976, 9.28683)
+mass = 5.0
+metadata/_edit_group_ = true
+
+[node name="PlayBallSt" type="Marker3D" parent="RigidBodies/PuppetPlayBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/PuppetPlayBall"]
+shape = SubResource("SphereShape3D_p2b5u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/PuppetPlayBall"]
+mesh = SubResource("SphereMesh_jar1g")
+
+[node name="Arpoon" parent="." instance=ExtResource("5_1fkqt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55301, 0, -2.85783)
+
+[node name="CuerdaImp2" parent="." instance=ExtResource("4_rfvmy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89591, 1.52246, -1.74269)
+chained_links_count = 22
+
+[node name="ArpoonProjectile" parent="." instance=ExtResource("6_mvxb6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51847, 1.56972, -1.22316)
+
+[node name="PhysObidientBody" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46857, 1, -3.08428)
+collision_layer = 4
+collision_mask = 4
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+script = ExtResource("7_mvxb6")
+follow_force = 4000.0
+metadata/_edit_group_ = true
+
+[node name="PuppCharCollider" type="CollisionShape3D" parent="PhysObidientBody"]
+shape = SubResource("BoxShape3D_w13f8")
+
+[node name="ObidientSt" type="Marker3D" parent="PhysObidientBody"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PhysObidientBody"]
+shape = SubResource("SeparationRayShape3D_2oqvl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PhysObidientBody"]
+mesh = SubResource("BoxMesh_wrro6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xhak0")
+
+[node name="Character" parent="." instance=ExtResource("8_w13f8")]
+collision_mask = 3
+floor_stop_on_slope = false
+jump_velocity = 7.155
+controls = {
+&"BACKWARD": "cs_backward",
+&"CROUCH": "crouch",
+&"FORWARD": "cs_forward",
+&"JUMP": "ui_accept",
+&"LEFT": "cs_left",
+&"PAUSE": "ui_cancel",
+&"RIGHT": "cs_right",
+&"SPRINT": "sprint"
+}
+in_air_momentum = false
+continuous_jumping = false
+
+[node name="AreaWeight" type="Area3D" parent="Character"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character/AreaWeight"]
+shape = SubResource("BoxShape3D_2oqvl")

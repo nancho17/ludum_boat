@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://b2i1ye6a8vi5f"]
 
-[ext_resource type="Script" uid="uid://bc5ebc3r0qeoa" path="res://arpoon/arpoon.gd" id="1_svd1h"]
-[ext_resource type="PackedScene" uid="uid://bl15wqyevkigd" path="res://arpoon/arpoon_projectile.tscn" id="2_mmv02"]
-[ext_resource type="Script" uid="uid://dyw0kxod3i1ej" path="res://arpoon/instruction_text.gd" id="2_xxe20"]
+[ext_resource type="Script" uid="uid://bc5ebc3r0qeoa" path="res://test_scenarios/arpoon/arpoon.gd" id="1_svd1h"]
+[ext_resource type="PackedScene" uid="uid://bl15wqyevkigd" path="res://test_scenarios/arpoon/arpoon_projectile.tscn" id="2_mmv02"]
+[ext_resource type="Script" uid="uid://dyw0kxod3i1ej" path="res://test_scenarios/arpoon/instruction_text.gd" id="2_xxe20"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xxe20"]
 albedo_color = Color(0.226707, 0.226707, 0.226707, 1)

@@ -1,12 +1,11 @@
 extends Node3D
 
-@onready var camera_3d_2: Camera3D = $Camera3D2
-@onready var camera_3d_3: Camera3D = $Camera3D3
-@onready var camera_3d_4: Camera3D = $Camera3D4
-@onready var camera_3d_5: Camera3D = $Camera3D5
+@onready var camera_3d_2: Camera3D = $WorldMisc/Camera3D2
+@onready var camera_3d_3: Camera3D = $WorldMisc/Camera3D3
+@onready var camera_3d_4: Camera3D = $WorldMisc/Camera3D4
+@onready var camera_3d_5: Camera3D = $WorldMisc/Camera3D5
 
 @onready var character: CharacterBody3D = $Character
-
 
 var cameras :Array
 var cameras_qty : int
@@ -18,9 +17,9 @@ var flag_tool : bool = false
 func _ready() -> void:
 	cameras = [
 		camera_3d_2,
-		camera_3d_5,
-		camera_3d_4,
 		camera_3d_3,
+		camera_3d_4,
+		camera_3d_5,
 		character.CAMERA,
 
 		]
