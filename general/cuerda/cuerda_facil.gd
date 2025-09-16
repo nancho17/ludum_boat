@@ -15,7 +15,7 @@ extends Node3D
 
 const LINK_POINT = preload("res://general/cuerda/link_point.tscn")
 
-var link_height :float = .15
+var link_height :float = .13
 var link_array :Array=[] 
 var initial_dir_vec : Vector3 = Vector3.DOWN
 

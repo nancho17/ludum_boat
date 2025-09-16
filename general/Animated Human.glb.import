@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://blbyoht8xfp04"
-path="res://.godot/imported/Animated Human.glb-2c94f59ab30d2e519ff57bdd47999014.scn"
+path="res://.godot/imported/Animated Human.glb-9e971eaed656b37dec9a006d9f08e173.scn"
 
 [deps]
 
-source_file="res://general/cuerda/Animated Human.glb"
-dest_files=["res://.godot/imported/Animated Human.glb-2c94f59ab30d2e519ff57bdd47999014.scn"]
+source_file="res://general/Animated Human.glb"
+dest_files=["res://.godot/imported/Animated Human.glb-9e971eaed656b37dec9a006d9f08e173.scn"]
 
 [params]
 

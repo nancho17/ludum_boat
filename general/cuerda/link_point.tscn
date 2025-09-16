@@ -38,6 +38,7 @@ shader_parameter/in_dashed_count_x = 6.0
 shader_parameter/in_dashed_count_y = 6.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_a1blu"]
+margin = 0.08
 radius = 0.1
 
 [node name="LinkPoint" type="RigidBody3D"]

@@ -26,7 +26,8 @@ window/size/viewport_height=600
 folder_colors={
 "res://general/": "orange",
 "res://main_menu/": "red",
-"res://play_scenarios/": "yellow"
+"res://play_scenarios/": "yellow",
+"res://test_scenarios/": "green"
 }
 
 [gui]

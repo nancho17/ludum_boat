@@ -1,16 +1,16 @@
 [gd_scene load_steps=25 format=4 uid="uid://b2u4ni5g8u3fh"]
 
-[ext_resource type="Script" uid="uid://cvc1hee57vh4a" path="res://general/cuerda/cuerda.gd" id="1_ubrtp"]
-[ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_5e6ag"]
-[ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="4_eirjf"]
-[ext_resource type="PackedScene" uid="uid://dmdrhxqohmn7t" path="res://general/cuerda/cuerda_facil.tscn" id="4_jgyd5"]
+[ext_resource type="Script" uid="uid://cvc1hee57vh4a" path="res://test_scenarios/cuerda_free/cuerda.gd" id="1_op2v7"]
+[ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_45tyv"]
+[ext_resource type="PackedScene" uid="uid://dmdrhxqohmn7t" path="res://general/cuerda/cuerda_facil.tscn" id="3_ix85l"]
+[ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="4_vv5l4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jgyd5"]
 size = Vector2(10, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k11jl"]
 render_priority = 0
-shader = ExtResource("4_eirjf")
+shader = ExtResource("4_vv5l4")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.02
 shader_parameter/background_color = Color(0.2, 0.2, 0.2, 1)
@@ -48,7 +48,7 @@ subdivide_depth = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se6wv"]
 render_priority = 0
-shader = ExtResource("4_eirjf")
+shader = ExtResource("4_vv5l4")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.02
 shader_parameter/background_color = Color(0.064, 0.2, 0.168267, 1)
@@ -2503,10 +2503,10 @@ _data = {
 size = Vector3(0.24, 2, 0.395)
 
 [node name="Cuerdatest" type="Node3D"]
-script = ExtResource("1_ubrtp")
+script = ExtResource("1_op2v7")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("2_5e6ag")
+environment = ExtResource("2_45tyv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -2543,7 +2543,7 @@ transform = Transform3D(0.856249, 0.323008, -0.403116, 0, 0.780383, 0.625303, 0.
 [node name="Camera3D5" type="Camera3D" parent="."]
 transform = Transform3D(0.223205, 0.657974, -0.719201, 0, 0.737815, 0.675003, 0.974772, -0.150664, 0.164684, -9.29233, 9.07928, 6.30538)
 
-[node name="CuerdaFacil" parent="." instance=ExtResource("4_jgyd5")]
+[node name="CuerdaFacil" parent="." instance=ExtResource("3_ix85l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.649626, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
