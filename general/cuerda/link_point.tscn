@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://dng165oanwx38"]
+
+[ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="1_8rtxi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8rtxi"]
+friction = 0.85
+rough = true
+absorbent = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_a1blu"]
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gc4lr"]
+render_priority = 0
+shader = ExtResource("1_8rtxi")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.30058, 0.2356, 0.38, 1)
+shader_parameter/background_color_two = Color(0.984314, 0.85098, 0.101961, 1)
+shader_parameter/grid_color = Color(0.25, 0.1925, 0.213583, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a1blu"]
+margin = 0.08
+radius = 0.1
+
+[node name="LinkPoint" type="RigidBody3D"]
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_8rtxi")
+linear_damp = 5.0
+angular_damp = 40.0
+
+[node name="MeshIndex" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_a1blu")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_gc4lr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_a1blu")
+debug_color = Color(0.627625, 0.0825, 0.75, 0.756863)

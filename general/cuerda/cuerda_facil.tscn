@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmdrhxqohmn7t"]
+
+[ext_resource type="Script" uid="uid://cvlbr6xp4hxwm" path="res://general/cuerda/cuerda_facil.gd" id="1_sh7sb"]
+[ext_resource type="PackedScene" uid="uid://dng165oanwx38" path="res://general/cuerda/link_point.tscn" id="2_vfvb3"]
+
+[sub_resource type="Curve3D" id="Curve3D_ryl0k"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_481a0"]
+albedo_color = Color(0.15484, 0.1176, 0.49, 1)
+
+[node name="CuerdaImp" type="Node3D"]
+script = ExtResource("1_sh7sb")
+
+[node name="Path3D" type="Path3D" parent="."]
+top_level = true
+curve = SubResource("Curve3D_ryl0k")
+
+[node name="LinkPoint" parent="." instance=ExtResource("2_vfvb3")]
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+top_level = true
+calculate_tangents = false
+polygon = PackedVector2Array(-0.000594433, -0.0438382, -0.0607748, -0.00103387, -0.000594433, 0.0544846, 0.0591621, -0.00103387)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 0.1
+path_simplify_angle = 1.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 2.0
+path_joined = false
+material = SubResource("StandardMaterial3D_481a0")

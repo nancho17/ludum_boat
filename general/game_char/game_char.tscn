@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://2ojuy8hh3ouo"]
+
+[ext_resource type="Script" uid="uid://c2g6hf3jm1vyq" path="res://general/game_char/game_char.gd" id="1_kua1d"]
+[ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_m66ig"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kua1d"]
+
+[node name="GameChar" type="Node3D"]
+script = ExtResource("1_kua1d")
+
+[node name="Character" parent="." instance=ExtResource("1_m66ig")]
+collision_mask = 3
+floor_stop_on_slope = false
+jump_velocity = 7.155
+controls = {
+&"BACKWARD": "cs_backward",
+&"CROUCH": "crouch",
+&"FORWARD": "cs_forward",
+&"JUMP": "ui_accept",
+&"LEFT": "cs_left",
+&"PAUSE": "ui_cancel",
+&"RIGHT": "cs_right",
+&"SPRINT": "sprint"
+}
+in_air_momentum = false
+continuous_jumping = false
+
+[node name="AreaWeight" type="Area3D" parent="Character"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character/AreaWeight"]
+shape = SubResource("BoxShape3D_kua1d")

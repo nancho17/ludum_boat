@@ -1,0 +1,30 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://i18reu5ancuj"]
+
+[ext_resource type="Texture2D" uid="uid://ds88uk8tjoyv0" path="res://play_scenarios/intro/kloppenheim_06_puresky_1k.hdr" id="1_qbpgf"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kpapv"]
+panorama = ExtResource("1_qbpgf")
+
+[sub_resource type="Sky" id="Sky_v5huk"]
+sky_material = SubResource("PanoramaSkyMaterial_kpapv")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_v5huk")
+sky_rotation = Vector3(0, 1.8867, 0)
+ambient_light_source = 3
+ambient_light_color = Color(0.74902, 0.74902, 0.74902, 1)
+ambient_light_sky_contribution = 0.31
+ambient_light_energy = 0.92
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_white = 2.67
+glow_enabled = true
+glow_levels/3 = 0.95
+glow_normalized = true
+glow_intensity = 1.35
+glow_strength = 1.35
+glow_bloom = 0.53
+glow_blend_mode = 4
+adjustment_enabled = true
+adjustment_contrast = 1.2
