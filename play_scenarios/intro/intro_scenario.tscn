@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://cestmq8cb5j4n"]
+[gd_scene load_steps=28 format=3 uid="uid://cestmq8cb5j4n"]
 
 [ext_resource type="Script" uid="uid://bq5edjwfa2iyy" path="res://play_scenarios/wave_test.gd" id="1_kwm51"]
 [ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_jsjb0"]
 [ext_resource type="Shader" uid="uid://bvogrwwn7gsyx" path="res://play_scenarios/water_wave.gdshader" id="2_v5huk"]
 [ext_resource type="Script" uid="uid://ybya1hglhid" path="res://play_scenarios/water.gd" id="3_jsjb0"]
 [ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="4_kpapv"]
+[ext_resource type="Texture2D" uid="uid://dwkkjw46xwwir" path="res://general/water_p/wave_noise.tres" id="4_vhj5a"]
 [ext_resource type="PackedScene" uid="uid://boaovgil67cnt" path="res://general/game_boats/boat/playable_boat.tscn" id="5_v5huk"]
 [ext_resource type="PackedScene" uid="uid://2ojuy8hh3ouo" path="res://general/game_char/game_char.tscn" id="7_jsjb0"]
 
@@ -23,9 +24,9 @@ auto_exposure_max_sensitivity = 422.2
 frequency = 0.005
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6u7fg"]
+noise = SubResource("FastNoiseLite_u81vp")
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_u81vp")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mqp4i"]
 noise_type = 3
@@ -33,22 +34,9 @@ seed = 2575
 frequency = 0.0084
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_asux5"]
+noise = SubResource("FastNoiseLite_mqp4i")
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_mqp4i")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_wtpit"]
-noise_type = 3
-seed = 1850
-frequency = 0.0007
-offset = Vector3(67.11, -1295.54, 0)
-fractal_type = 2
-fractal_gain = 0.41
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_afsxu"]
-seamless = true
-normalize = false
-noise = SubResource("FastNoiseLite_wtpit")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g8eo8"]
 render_priority = 0
@@ -61,7 +49,7 @@ shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.02
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_6u7fg")
 shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_asux5")
-shader_parameter/wave = SubResource("NoiseTexture2D_afsxu")
+shader_parameter/wave = ExtResource("4_vhj5a")
 shader_parameter/wave_time = 0.0
 shader_parameter/wave_direction = Vector2(0.375, 0)
 shader_parameter/wave_2_direction = Vector2(0.815, 0)
@@ -231,7 +219,6 @@ transform = Transform3D(0.642787, 0.2494, -0.72431, 0, 0.945519, 0.325568, 0.766
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_c3bvi")
 script = ExtResource("3_jsjb0")
-metadata/_edit_lock_ = true
 
 [node name="PlayableBoat" parent="." node_paths=PackedStringArray("water_boat") instance=ExtResource("5_v5huk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 2.70827, -0.643)

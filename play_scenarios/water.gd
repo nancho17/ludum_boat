@@ -16,7 +16,7 @@ func _ready() -> void:
 
 	el_noise_texture = material.get_shader_parameter("wave")#shader_parameter/wave
 
-	noise = el_noise_texture.get_image()
+
 	#var el_fast_noise_texture : FastNoiseLite = material.get_shader_parameter("wave").noise#shader_parameter/wave
 	#noise  = el_fast_noise_texture.get_image(512, 512,false,false,false)
 
@@ -24,8 +24,12 @@ func _ready() -> void:
 	noise_scale = material.get_shader_parameter("noise_scale")#shader_parameter/noise_scale
 	wave_speed = material.get_shader_parameter("wave_speed")#shader_parameter/wave_speed
 	height_scale = material.get_shader_parameter("height_scale")#shader_parameter/height_scale
+
+	while el_noise_texture == null or el_noise_texture.get_image() == null:
+		await get_tree().process_frame
+	noise = el_noise_texture.get_image()
+
 	print("set_physics_process(true)")
-#	noise.get_mipmap_offset()	
 	
 func _physics_process(delta: float) -> void:
 	time+=delta
