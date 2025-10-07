@@ -1,11 +1,97 @@
-[gd_scene load_steps=51 format=4 uid="uid://b0y5b0h8nrpjf"]
+[gd_scene load_steps=66 format=4 uid="uid://ce72qflh8f7t3"]
 
-[ext_resource type="Script" uid="uid://c07jjnlm12pie" path="res://test_scenarios/cuerda_attached/cuerda_attached.gd" id="1_p2b5u"]
-[ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_08cdy"]
-[ext_resource type="PackedScene" uid="uid://dmdrhxqohmn7t" path="res://general/cuerda/cuerda_facil.tscn" id="3_m1gj3"]
-[ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="4_jar1g"]
-[ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="5_m1gj3"]
-[ext_resource type="Script" uid="uid://cuhv5bogqm7r" path="res://general/cuerda/phisic_link_body.gd" id="6_m1gj3"]
+[ext_resource type="Script" uid="uid://c07jjnlm12pie" path="res://test_scenarios/cuerda_attached/cuerda_attached.gd" id="1_mctva"]
+[ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_ghhgp"]
+[ext_resource type="Script" uid="uid://c2g6hf3jm1vyq" path="res://general/game_char/game_char.gd" id="3_2o06e"]
+[ext_resource type="Shader" uid="uid://hplknvfbihej" path="res://play_scenarios/grid_protos.gdshader" id="3_x2ypo"]
+[ext_resource type="Script" uid="uid://cuhv5bogqm7r" path="res://general/cuerda/phisic_link_body.gd" id="5_dva8b"]
+[ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="6_qi28u"]
+[ext_resource type="Script" uid="uid://bq8qyxu3o7c8r" path="res://test_scenarios/basket_field/score_area.gd" id="7_35tw5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2o06e"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m1gj3"]
+friction = 0.8
+bounce = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2o06e"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(1, 0.216, 0.02, 1)
+metallic = 0.09
+roughness = 0.69
+emission_enabled = true
+emission = Color(0.49, 0.47334, 0.2401, 1)
+emission_energy_multiplier = 16.0
+emission_operator = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_jar1g"]
+material = SubResource("StandardMaterial3D_2o06e")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aaahy"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(1, 0.216, 0.02, 1)
+metallic = 0.09
+roughness = 0.69
+emission_enabled = true
+emission = Color(0.49, 0.47334, 0.2401, 1)
+emission_energy_multiplier = 16.0
+emission_operator = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m1gj3"]
+radius = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2b5u"]
+render_priority = 0
+shader = ExtResource("3_x2ypo")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.12
+shader_parameter/background_color = Color(0.17937, 0.178939, 0.0812879, 1)
+shader_parameter/background_color_two = Color(0.301255, 0.207168, 0.0357962, 1)
+shader_parameter/grid_color = Color(0.633021, 0.674202, 0.912054, 1)
+shader_parameter/dashed_scale_x = 0.35
+shader_parameter/dashed_scale_y = 0.37
+shader_parameter/dashed_count_x = 2.0
+shader_parameter/dashed_count_y = 2.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_m1gj3"]
+material = SubResource("ShaderMaterial_p2b5u")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2o06e"]
+auto_exposure_enabled = true
+dof_blur_far_enabled = true
+dof_blur_far_distance = 400.0
+dof_blur_near_distance = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35tw5"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(1, 0.216, 0.02, 1)
+metallic = 0.09
+roughness = 0.69
+emission_enabled = true
+emission = Color(0.49, 0.47334, 0.2401, 1)
+emission_energy_multiplier = 16.0
+emission_operator = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_mmu57"]
+material = SubResource("StandardMaterial3D_35tw5")
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p2b5u"]
 size = Vector3(4, 1, 2)
@@ -15,7 +101,7 @@ size = Vector3(4, 1, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se6wv"]
 render_priority = 0
-shader = ExtResource("4_jar1g")
+shader = ExtResource("3_x2ypo")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.02
 shader_parameter/background_color = Color(0.064, 0.2, 0.168267, 1)
@@ -42,7 +128,7 @@ size = Vector2(20, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k11jl"]
 render_priority = 0
-shader = ExtResource("4_jar1g")
+shader = ExtResource("3_x2ypo")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.02
 shader_parameter/background_color = Color(0.2, 0.2, 0.2, 1)
@@ -66,6 +152,52 @@ shader_parameter/in_dashed_count_y = 6.0
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_u06aa"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_35tw5"]
+margin = 0.1
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_2x2u2"]
+inner_radius = 0.7
+outer_radius = 0.8
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2x2u2"]
+points = PackedVector3Array(0.3301587, 0.03887149, 0.76186246, 0.45710307, -0.011894819, 0.48253965, 0.45710307, 0.013482121, 0.48253965, 0, -0.037284188, 0.6856894, 0.5079067, -0.062673554, 0.6349504, 0, 0.064260855, 0.71105886, 0.634851, 0.064260855, 0.5079738, 0, -0.037284188, 0.81269836, 0.634851, -0.062673554, 0.48253965, 0.1778772, 0.064260855, 0.7872642, 0.1778772, -0.062673554, 0.7872642, 0, -0.062673554, 0.71105886, 0.5079067, 0.064260855, 0.48253965, 0.48244023, -0.062673554, 0.48253965, 0.5079067, -0.037284188, 0.6602876, 0, 0.03887149, 0.81269836, 0.25401795, -0.037284188, 0.7872642, 0.5079067, 0.064260855, 0.6349504, 0, 0.03887149, 0.6856894, 0.6603174, -0.037284188, 0.5079738, 0.15241078, 0.013482121, 0.81269836, 0.53330845, 0.03887149, 0.6349504, 0.634851, 0.064260855, 0.48253965, 0.43163663, -0.037284188, 0.71105886, 0, -0.062673554, 0.7872642, 0, 0.064260855, 0.7872642, 0.15241078, -0.037284188, 0.81269836, 0.27941975, -0.062673554, 0.76186246, 0.6603174, 0.013482121, 0.5079738, 0.27941975, 0.064260855, 0.76186246, 0.43163663, 0.013482121, 0.71105886, 0.3301587, -0.037284188, 0.76186246)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2o06e"]
+points = PackedVector3Array(0.48253965, -0.011894819, 0.48253965, 0.81269836, 0.013482121, 0.1524232, 0.7872642, 0.03887149, 0.25388122, 0.71105886, 0.064260855, 0, 0.71105886, -0.062673554, 0, 0.6856894, -0.062673554, 0.43171617, 0.6349504, 0.064260855, 0.48253965, 0.5079738, 0.064260855, 0.45712793, 0.5079738, -0.062673554, 0.48253965, 0.81269836, -0.037284188, 0, 0.7872642, 0.064260855, 0, 0.6856894, 0.03887149, 0, 0.7872642, -0.062673554, 0.17783494, 0.71105886, -0.037284188, 0.43171617, 0.6856894, -0.037284188, 0, 0.48253965, -0.011894819, 0.45712793, 0.6349504, -0.062673554, 0.48253965, 0.6856894, 0.064260855, 0.43171617, 0.76186246, -0.037284188, 0.33011645, 0.7872642, 0.064260855, 0.17783494, 0.736493, 0.03887149, 0.38093993, 0.81269836, 0.03887149, 0, 0.81269836, -0.037284188, 0.1524232, 0.5079738, -0.062673554, 0.45712793, 0.7872642, -0.062673554, 0, 0.6602876, 0.03887149, 0.48253965, 0.48253965, 0.013482121, 0.45712793, 0.5079738, 0.064260855, 0.48253965, 0.76186246, 0.064260855, 0.2793402, 0.81269836, 0.03887149, 0.12701148, 0.76186246, -0.062673554, 0.2793402, 0.6602876, -0.037284188, 0.48253965)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_35tw5"]
+points = PackedVector3Array(-0.12701148, 0.03887149, 0.81269836, -0.48253965, -0.011894819, 0.48253965, -0.48253965, 0.013482121, 0.48253965, 0, -0.037284188, 0.6856894, -0.43171617, -0.062673554, 0.6856894, 0, 0.064260855, 0.71105886, -0.48253965, 0.064260855, 0.6349504, 0, -0.062673554, 0.7872642, -0.48253965, -0.062673554, 0.5079738, -0.45712793, 0.064260855, 0.5079738, -0.33011645, -0.037284188, 0.76186246, -0.2793402, 0.064260855, 0.76186246, 0, 0.064260855, 0.7872642, 0, 0.03887149, 0.6856894, -0.1524232, -0.037284188, 0.81269836, -0.48253965, -0.037284188, 0.6602876, -0.38093993, 0.03887149, 0.736493, 0, -0.062673554, 0.71105886, -0.45712793, -0.011894819, 0.48253965, 0, -0.037284188, 0.81269836, -0.17783494, -0.062673554, 0.7872642, -0.25388122, 0.03887149, 0.7872642, -0.45712793, -0.062673554, 0.5079738, -0.45712793, 0.013482121, 0.48253965, -0.43171617, -0.037284188, 0.71105886, -0.45712793, 0.03887149, 0.6856894, 0, 0.03887149, 0.81269836, -0.48253965, -0.062673554, 0.6349504, -0.48253965, 0.064260855, 0.5079738, -0.17783494, 0.064260855, 0.7872642, -0.43171617, 0.064260855, 0.6856894, -0.2793402, -0.062673554, 0.76186246)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mmu57"]
+points = PackedVector3Array(-0.81269836, 0.013482121, 0.15241078, -0.48253965, 0.013482121, 0.6603174, -0.48253965, -0.037284188, 0.6603174, -0.6856894, 0.03887149, 0, -0.71105886, -0.062673554, 0, -0.6856894, -0.062673554, 0.43163663, -0.6349504, 0.064260855, 0.5079067, -0.48253965, -0.062673554, 0.48244023, -0.48253965, 0.064260855, 0.5079067, -0.7872642, 0.064260855, 0, -0.7872642, -0.062673554, 0, -0.76186246, 0.03887149, 0.3301587, -0.7872642, -0.037284188, 0.25401795, -0.6602876, -0.037284188, 0.5079067, -0.5079738, 0.064260855, 0.634851, -0.5079738, -0.062673554, 0.634851, -0.48253965, 0.013482121, 0.45710307, -0.6856894, -0.037284188, 0, -0.7872642, 0.064260855, 0.1778772, -0.71105886, 0.064260855, 0, -0.81269836, -0.037284188, 0, -0.5079738, 0.013482121, 0.6603174, -0.7872642, -0.062673554, 0.1778772, -0.6349504, 0.03887149, 0.53330845, -0.81269836, 0.03887149, 0, -0.71105886, -0.037284188, 0.43163663, -0.81269836, -0.037284188, 0.15241078, -0.5079738, -0.037284188, 0.6603174, -0.76186246, 0.064260855, 0.27941975, -0.48253965, 0.064260855, 0.634851, -0.76186246, -0.037284188, 0.3301587, -0.71105886, 0.013482121, 0.43163663)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jrh53"]
+points = PackedVector3Array(0.53337556, 0.03887149, -0.634851, 0.81269836, 0.03887149, 0, 0.81269836, -0.037284188, 0, 0.48253965, 0.013482121, -0.45710307, 0.6856894, -0.062673554, -0.43163663, 0.48253965, -0.062673554, -0.48244023, 0.6856894, 0.03887149, 0, 0.76186246, 0.064260855, -0.27941975, 0.71105886, -0.062673554, 0, 0.48253965, 0.064260855, -0.5079067, 0.48253965, -0.062673554, -0.634851, 0.71105886, 0.064260855, 0, 0.76186246, -0.037284188, -0.3301587, 0.6602876, 0.013482121, -0.5079067, 0.48253965, 0.064260855, -0.634851, 0.7872642, -0.062673554, -0.1778772, 0.81269836, 0.013482121, -0.15241078, 0.6856894, -0.037284188, 0, 0.5079738, -0.037284188, -0.6603174, 0.6349504, 0.064260855, -0.5079067, 0.76186246, 0.03887149, -0.3301587, 0.6602876, -0.037284188, -0.5079067, 0.7872642, 0.064260855, 0, 0.81269836, -0.037284188, -0.15241078, 0.7872642, -0.062673554, 0, 0.81269836, 0.03887149, -0.12700897, 0.6349504, -0.062673554, -0.5079067, 0.71105886, -0.037284188, -0.43163663, 0.7872642, 0.03887149, -0.25401795, 0.48253965, 0.013482121, -0.6603174, 0.7872642, 0.064260855, -0.1778772, 0.736493, 0.03887149, -0.38089767)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g4x8v"]
+points = PackedVector3Array(0.48253965, 0.03887149, -0.6602876, 0, -0.037284188, -0.81269836, 0, 0.03887149, -0.81269836, 0.45712793, 0.013482121, -0.48253965, 0.48253965, -0.062673554, -0.6349504, 0, -0.062673554, -0.71105886, 0, 0.064260855, -0.71105886, 0.25388122, -0.037284188, -0.7872642, 0.48253965, -0.062673554, -0.5079738, 0.48253965, 0.064260855, -0.5079738, 0.2793402, 0.064260855, -0.76186246, 0, -0.037284188, -0.6856894, 0.17783494, -0.062673554, -0.7872642, 0.43171617, -0.037284188, -0.71105886, 0, 0.03887149, -0.6856894, 0.1524232, 0.013482121, -0.81269836, 0.33011645, 0.03887149, -0.76186246, 0.48253965, 0.064260855, -0.6349504, 0, 0.064260855, -0.7872642, 0.45712793, -0.062673554, -0.5079738, 0.45712793, 0.064260855, -0.5079738, 0, -0.062673554, -0.7872642, 0.45712793, -0.011894819, -0.48253965, 0.1524232, -0.037284188, -0.81269836, 0.12701148, 0.03887149, -0.81269836, 0.2793402, -0.062673554, -0.76186246, 0.38093993, 0.03887149, -0.736493, 0.33011645, -0.037284188, -0.76186246, 0.43171617, 0.064260855, -0.6856894, 0.17783494, 0.064260855, -0.7872642, 0.25388122, 0.03887149, -0.7872642, 0.48253965, -0.011894819, -0.48253965)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tr1bv"]
+points = PackedVector3Array(-0.76186246, -0.037284188, -0.33011645, -0.48253965, 0.013482121, -0.45712793, -0.48253965, -0.011894819, -0.45712793, -0.6856894, 0.03887149, 0, -0.6856894, 0.064260855, -0.43171617, -0.71105886, -0.062673554, 0, -0.81269836, 0.03887149, 0, -0.6349504, -0.062673554, -0.48253965, -0.5079738, 0.064260855, -0.48253965, -0.5079738, -0.062673554, -0.48253965, -0.7872642, -0.062673554, 0, -0.71105886, 0.064260855, 0, -0.7872642, 0.064260855, -0.17783494, -0.81269836, -0.037284188, -0.1524232, -0.6602876, 0.03887149, -0.48253965, -0.6856894, -0.037284188, 0, -0.76186246, 0.03887149, -0.33011645, -0.76186246, -0.062673554, -0.2793402, -0.71105886, -0.037284188, -0.43171617, -0.81269836, 0.03887149, -0.12701148, -0.5079738, -0.062673554, -0.45712793, -0.5079738, 0.064260855, -0.45712793, -0.7872642, 0.064260855, 0, -0.81269836, -0.037284188, 0, -0.7872642, 0.03887149, -0.25388122, -0.6349504, 0.064260855, -0.48253965, -0.71105886, 0.013482121, -0.43171617, -0.7872642, -0.062673554, -0.17783494, -0.76186246, 0.064260855, -0.2793402, -0.48253965, 0.013482121, -0.48253965, -0.6602876, -0.037284188, -0.48253965, -0.6856894, -0.062673554, -0.43171617)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ltbnm"]
+points = PackedVector3Array(-0.6603174, 0.013482121, -0.48253965, -0.15241078, -0.037284188, -0.81269836, -0.15241078, 0.013482121, -0.81269836, 0, -0.037284188, -0.6856894, 0, 0.064260855, -0.71105886, -0.48244023, -0.062673554, -0.48253965, -0.5079067, 0.064260855, -0.48253965, -0.43163663, 0.064260855, -0.6856894, -0.5079067, -0.062673554, -0.6349504, 0, -0.062673554, -0.7872642, 0, 0.064260855, -0.7872642, -0.43163663, -0.037284188, -0.71105886, -0.6603174, -0.037284188, -0.5079738, -0.634851, 0.064260855, -0.5079738, -0.45710307, 0.013482121, -0.48253965, -0.3301587, 0.03887149, -0.76186246, -0.53330845, 0.03887149, -0.6349504, 0, 0.03887149, -0.6856894, -0.27941975, -0.062673554, -0.76186246, 0, -0.062673554, -0.71105886, -0.634851, -0.062673554, -0.48253965, -0.1778772, 0.064260855, -0.7872642, 0, 0.03887149, -0.81269836, -0.5079067, -0.037284188, -0.6602876, -0.3301587, -0.037284188, -0.76186246, 0, -0.037284188, -0.81269836, -0.634851, 0.03887149, -0.53337556, -0.634851, 0.064260855, -0.48253965, -0.43163663, 0.013482121, -0.71105886, -0.25401795, 0.03887149, -0.7872642, -0.45710307, -0.011894819, -0.48253965, -0.12700897, 0.03887149, -0.81269836)
+
+[sub_resource type="Gradient" id="Gradient_2o06e"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.125, 0.5, 0.625, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0.95, 0.95, 0.95, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 8
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_35tw5"]
+gradient = SubResource("Gradient_2o06e")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.834, 0.124)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ubrtp"]
 size = Vector3(1, 5, 1)
 
@@ -74,7 +206,7 @@ height = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m1gj3"]
 render_priority = 0
-shader = ExtResource("4_jar1g")
+shader = ExtResource("3_x2ypo")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.02
 shader_parameter/background_color = Color(0.283887, 0.0872481, 0.20765, 1)
@@ -96,18 +228,54 @@ shader_parameter/in_dashed_scale_y = 0.3
 shader_parameter/in_dashed_count_x = 6.0
 shader_parameter/in_dashed_count_y = 6.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_08cdy"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2o06e"]
+size = Vector3(0.1, 3, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2x2u2"]
+size = Vector3(0.1, 3, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2x2u2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_p2b5u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jar1g"]
 render_priority = 0
-shader = ExtResource("4_jar1g")
+shader = ExtResource("3_x2ypo")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.12
 shader_parameter/background_color = Color(0.213232, 0.142733, 0.225715, 1)
 shader_parameter/background_color_two = Color(0.160001, 0.136882, 0.559607, 1)
 shader_parameter/grid_color = Color(0.192755, 0.780383, 0.804946, 1)
+shader_parameter/dashed_scale_x = 0.35
+shader_parameter/dashed_scale_y = 0.37
+shader_parameter/dashed_count_x = 2.0
+shader_parameter/dashed_count_y = 2.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_08cdy"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2o06e"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_35tw5"]
+render_priority = 0
+shader = ExtResource("3_x2ypo")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.12
+shader_parameter/background_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/background_color_two = Color(0.69, 0.69, 0.69, 1)
+shader_parameter/grid_color = Color(0.8, 0.47573337, 0.19200002, 1)
 shader_parameter/dashed_scale_x = 0.35
 shader_parameter/dashed_scale_y = 0.37
 shader_parameter/dashed_count_x = 2.0
@@ -135,70 +303,6 @@ left_to_right = 0.1
 size = Vector3(0.1, 0.5, 0.1)
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_08cdy"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jar1g"]
-size = Vector3(0.05, 0.05, 0.05)
-
-[sub_resource type="BoxMesh" id="BoxMesh_aaahy"]
-size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_rs34o"]
-size = Vector3(0.05, 0.05, 2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wuba"]
-albedo_color = Color(0.15, 0.235, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_jar1g"]
-size = Vector3(0.005, 0.035, 0.02)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aaahy"]
-cull_mode = 2
-no_depth_test = true
-albedo_color = Color(1, 0.216, 0.02, 1)
-metallic = 0.09
-roughness = 0.69
-emission_enabled = true
-emission = Color(0.49, 0.47334, 0.2401, 1)
-emission_energy_multiplier = 16.0
-emission_operator = 1
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m1gj3"]
-friction = 0.54
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_m1gj3"]
-radius = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2b5u"]
-render_priority = 0
-shader = ExtResource("4_jar1g")
-shader_parameter/subdivisions = 32.0
-shader_parameter/grid_width = 0.12
-shader_parameter/background_color = Color(0.17937, 0.178939, 0.0812879, 1)
-shader_parameter/background_color_two = Color(0.301255, 0.207168, 0.0357962, 1)
-shader_parameter/grid_color = Color(0.633021, 0.674202, 0.912054, 1)
-shader_parameter/dashed_scale_x = 0.35
-shader_parameter/dashed_scale_y = 0.37
-shader_parameter/dashed_count_x = 2.0
-shader_parameter/dashed_count_y = 2.0
-shader_parameter/point_width = 0.021
-shader_parameter/point_color = Color(0, 0, 0, 1)
-shader_parameter/point_scale_x = 0.05
-shader_parameter/point_scale_y = 0.05
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_subdivisions = 6.0
-shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
-shader_parameter/in_dashed_scale_x = 0.3
-shader_parameter/in_dashed_scale_y = 0.3
-shader_parameter/in_dashed_count_x = 6.0
-shader_parameter/in_dashed_count_y = 6.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_m1gj3"]
-material = SubResource("ShaderMaterial_p2b5u")
-radius = 1.0
-height = 2.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_08cdy"]
-radius = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u06aa"]
 size = Vector3(1.2, 0.5, 1.2)
@@ -2637,54 +2741,26 @@ _data = {
 &"Human Armature|Working": SubResource("Animation_uaq8q")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_p2b5u"]
-radius = 0.1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_08cdy"]
-render_priority = 0
-shader = ExtResource("4_jar1g")
-shader_parameter/subdivisions = 32.0
-shader_parameter/grid_width = 0.12
-shader_parameter/background_color = Color(0.248, 0.62, 0.5084, 1)
-shader_parameter/background_color_two = Color(0.71, 0.298318, 0.2059, 1)
-shader_parameter/grid_color = Color(0.201852, 0.265139, 0.439691, 1)
-shader_parameter/dashed_scale_x = 0.35
-shader_parameter/dashed_scale_y = 0.37
-shader_parameter/dashed_count_x = 2.0
-shader_parameter/dashed_count_y = 2.0
-shader_parameter/point_width = 0.021
-shader_parameter/point_color = Color(0, 0, 0, 1)
-shader_parameter/point_scale_x = 0.05
-shader_parameter/point_scale_y = 0.05
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_subdivisions = 6.0
-shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
-shader_parameter/in_dashed_scale_x = 0.3
-shader_parameter/in_dashed_scale_y = 0.3
-shader_parameter/in_dashed_count_x = 6.0
-shader_parameter/in_dashed_count_y = 6.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_jar1g"]
-material = SubResource("ShaderMaterial_08cdy")
-radius = 0.1
-height = 0.2
-
-[node name="CuerdaAttached" type="Node3D"]
-script = ExtResource("1_p2b5u")
+[node name="Basket_field" type="Node3D"]
+script = ExtResource("1_mctva")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("2_08cdy")
+environment = ExtResource("2_ghhgp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2o06e")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
@@ -2693,13 +2769,49 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 1
 
-[node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(-0.385056, -0.716763, 0.581363, 0, 0.629935, 0.776648, -0.922893, 0.299053, -0.24256, 4.62775, 5.14959, -2.23943)
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Camera3D2" type="Camera3D" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.6360782, -0.5384323, 0.55271626, 0, 0.716302, 0.6977905, -0.7716246, -0.4438493, 0.45562404, -7.00062, 5.810808, 1.5817723)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="LabelPointsA" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "asdasda"
+
+[node name="Vs" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "VS"
+
+[node name="LabelPointsB" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "asd"
 
 [node name="Camera3D3" type="Camera3D" parent="."]
 transform = Transform3D(-0.95502, 0.236048, -0.179495, 0, 0.605294, 0.796002, 0.296541, 0.760198, -0.578068, -0.70066, 3.02419, -1.29052)
@@ -2713,8 +2825,79 @@ transform = Transform3D(0.0279643, -0.661764, 0.74919, 0, 0.749483, 0.662023, -0
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.823109, 0.30683, -0.477857, 0, 0.84147, 0.540304, 0.567884, -0.444729, 0.692621, 5.82635, 1.42641, 8.78187)
 
+[node name="BasketPupet" type="RigidBody3D" parent="." node_paths=PackedStringArray("to_follow", "to_rotate_order")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0598807, 0.839638, 2.6356506)
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_m1gj3")
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("5_dva8b")
+to_follow = NodePath("../game_char/Character/Head2/LeftHolder")
+to_rotate_order = NodePath("../game_char/Character/Head2")
+arrival_distance = 0.2
+follow_force = 500.0
+max_follow_force = 80.0
+metadata/_edit_group_ = true
+
+[node name="BallSt2" type="Marker3D" parent="BasketPupet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016239405, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasketPupet/BallSt2"]
+mesh = SubResource("BoxMesh_jar1g")
+surface_material_override/0 = SubResource("StandardMaterial3D_aaahy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasketPupet"]
+shape = SubResource("SphereShape3D_m1gj3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasketPupet"]
+mesh = SubResource("SphereMesh_m1gj3")
+
+[node name="game_char" type="Node3D" parent="." node_paths=PackedStringArray("basket_pupet", "target_score")]
+script = ExtResource("3_2o06e")
+basket_pupet = NodePath("../BasketPupet")
+target_score = NodePath("../RingPost/RingTarget")
+
+[node name="Character" parent="game_char" node_paths=PackedStringArray("HEAD", "CAMERA") instance=ExtResource("6_qi28u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.2, 0, 0.878)
+collision_mask = 3
+floor_stop_on_slope = false
+jump_velocity = 7.3
+HEAD = NodePath("Head2")
+CAMERA = NodePath("Head2/Camera3D")
+controls = {
+&"BACKWARD": "cs_backward",
+&"CROUCH": "crouch",
+&"FORWARD": "cs_forward",
+&"JUMP": "ui_accept",
+&"LEFT": "cs_left",
+&"PAUSE": "ui_cancel",
+&"RIGHT": "cs_right",
+&"SPRINT": "sprint"
+}
+in_air_momentum = false
+continuous_jumping = false
+
+[node name="Head2" type="Node3D" parent="game_char/Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="game_char/Character/Head2"]
+attributes = SubResource("CameraAttributesPractical_2o06e")
+current = true
+
+[node name="RightHolder" type="Marker3D" parent="game_char/Character/Head2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -1.5)
+
+[node name="RightMesh" type="MeshInstance3D" parent="game_char/Character/Head2/RightHolder"]
+mesh = SubResource("BoxMesh_mmu57")
+
+[node name="LeftHolder" type="Marker3D" parent="game_char/Character/Head2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -1.5)
+
+[node name="LeftMesh" type="MeshInstance3D" parent="game_char/Character/Head2/LeftHolder"]
+mesh = SubResource("BoxMesh_jar1g")
+
 [node name="StaticBody3D3" type="StaticBody3D" parent="."]
-transform = Transform3D(0.869129, 0.279233, 0.40822, -0.286433, 0.957052, -0.0448133, -0.403201, -0.0779791, 0.911783, 0.380149, 0.800158, -3.73557)
+transform = Transform3D(0.869129, 0.279233, 0.40822, -0.286433, 0.957052, -0.0448133, -0.403201, -0.0779791, 0.911783, 0.380149, 0.800158, -10.573807)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
@@ -2726,7 +2909,7 @@ mesh = SubResource("BoxMesh_u06aa")
 surface_material_override/0 = SubResource("ShaderMaterial_se6wv")
 
 [node name="StaticBody3D4" type="StaticBody3D" parent="."]
-transform = Transform3D(0.598472, -0.795653, 0.0936327, 0.78609, 0.605752, 0.122986, -0.154573, 7.54808e-10, 0.987981, -4.39913, -1.39871, 0.28123)
+transform = Transform3D(0.598472, -0.795653, 0.0936327, 0.78609, 0.605752, 0.122986, -0.154573, 7.54808e-10, 0.987981, -5.9644623, -1.39871, 11.622112)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
@@ -2748,21 +2931,65 @@ surface_material_override/0 = SubResource("ShaderMaterial_k11jl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_u06aa")
 
+[node name="ScoreArea" type="Area3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -8.469994, 3.4575582, 0)
+script = ExtResource("7_35tw5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ScoreArea"]
+shape = SubResource("BoxShape3D_35tw5")
+debug_color = Color(0.492239, 0.5798597, 0.25362757, 1)
+
+[node name="RingPost" type="StaticBody3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -8.469994, 3.9056425, 0)
+
+[node name="RingTarget" type="Marker3D" parent="RingPost"]
+transform = Transform3D(0.99999887, 0, 0, 0, 1, 0, 0, 0, 0.99999887, 0, 0, 0)
+
+[node name="Ring" type="MeshInstance3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+mesh = SubResource("TorusMesh_2x2u2")
+skeleton = NodePath("../../MasterPost")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_2x2u2")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_2o06e")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_35tw5")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_mmu57")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_jrh53")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_g4x8v")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_tr1bv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RingPost"]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ltbnm")
+
+[node name="RingTexture" type="TextureRect" parent="RingPost"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("GradientTexture2D_35tw5")
+
 [node name="MasterPost" type="StaticBody3D" parent="."]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -10, 2, 0)
 metadata/_edit_group_ = true
-
-[node name="MasterSt1" type="Marker3D" parent="MasterPost"]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -0.120657, 2.34136, 0.795744)
-
-[node name="MasterSt2" type="Marker3D" parent="MasterPost"]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.580596, 2.34136, -0.356223)
-
-[node name="MasterSt3" type="Marker3D" parent="MasterPost"]
-transform = Transform3D(0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0.655539, 2.34136, 0.490402)
-
-[node name="MasterSt4" type="Marker3D" parent="MasterPost"]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -0.567238, 2.34136, 0.0401251)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MasterPost"]
 shape = SubResource("BoxShape3D_ubrtp")
@@ -2772,48 +2999,51 @@ debug_color = Color(0.557806, 0.549669, 0.822175, 0.741176)
 mesh = SubResource("CapsuleMesh_08cdy")
 surface_material_override/0 = SubResource("ShaderMaterial_m1gj3")
 
-[node name="CuerdaImp" parent="." node_paths=PackedStringArray("first_link", "first_body", "last_link", "last_body") instance=ExtResource("3_m1gj3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0109304, 1.5203, 1.60647)
-first_link = NodePath("../MasterPost/MasterSt1")
-first_body = NodePath("../MasterPost")
-last_link = NodePath("../PupetSquare/SquareSt")
-last_body = NodePath("../PupetSquare")
-chained_links_count = 16
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MasterPost"]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0.54271793, 1.9194019, 0)
+shape = SubResource("BoxShape3D_2o06e")
+debug_color = Color(0.6311643, 0.52579856, 0.17779669, 0.41960785)
+
+[node name="Panel" type="MeshInstance3D" parent="MasterPost"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.54271793, 1.9194019, 0)
+mesh = SubResource("BoxMesh_2x2u2")
 
 [node name="PupetSquare" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6346, 4.04)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38, 0.5, 8.004)
 mass = 100.0
 constant_force = Vector3(0, 151.315, 122.515)
 metadata/_edit_group_ = true
 
-[node name="SquareSt" type="Marker3D" parent="PupetSquare"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293056, -0.65744)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PupetSquare"]
-shape = SubResource("BoxShape3D_08cdy")
+shape = SubResource("BoxShape3D_2x2u2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PupetSquare"]
 mesh = SubResource("BoxMesh_p2b5u")
 surface_material_override/0 = SubResource("ShaderMaterial_jar1g")
 
-[node name="CuerdaImp3" parent="." node_paths=PackedStringArray("first_link", "first_body", "last_link", "last_body") instance=ExtResource("3_m1gj3")]
-transform = Transform3D(-4.37114e-08, 0, 0.999999, 0, 1, 0, -1, 0, -4.37114e-08, 4.243, 1.532, 0.917)
-first_link = NodePath("../PupetBall2/BallSt2")
-first_body = NodePath("../PupetBall2")
-last_link = NodePath("../PhysObidientBody2/ObidientSt2")
-last_body = NodePath("../PhysObidientBody2")
-chained_links_count = 8
+[node name="PupetSquare2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.054, 1, 8.004)
+mass = 100.0
+constant_force = Vector3(0, 151.315, 122.515)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PupetSquare2"]
+shape = SubResource("BoxShape3D_08cdy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PupetSquare2"]
+mesh = SubResource("BoxMesh_2o06e")
+surface_material_override/0 = SubResource("ShaderMaterial_35tw5")
 
 [node name="PhysObidientBody2" type="RigidBody3D" parent="." node_paths=PackedStringArray("to_follow", "to_rotate_order")]
+process_mode = 4
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.95299, 1.5319, 0.917036)
+visible = false
 collision_layer = 4
 collision_mask = 4
-axis_lock_angular_x = true
-axis_lock_angular_z = true
 gravity_scale = 0.0
-script = ExtResource("6_m1gj3")
-to_follow = NodePath("../Character/Head2/Holder2")
-to_rotate_order = NodePath("../Character/Head2")
+script = ExtResource("5_dva8b")
+to_follow = NodePath("../game_char/Character/Head2/RightHolder")
+to_rotate_order = NodePath("../game_char/Character/Head2")
 arrival_distance = 0.5
 follow_force = 100.0
 max_follow_force = 120.0
@@ -2823,7 +3053,7 @@ metadata/_edit_group_ = true
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="PhysObidientBody2"]
 mesh = SubResource("BoxMesh_m1gj3")
-skeleton = NodePath("../../Character")
+skeleton = NodePath("../../game_char/Character")
 
 [node name="PuppCharCollider" type="CollisionShape3D" parent="PhysObidientBody2"]
 shape = SubResource("BoxShape3D_aaahy")
@@ -2839,125 +3069,27 @@ visible = false
 [node name="SpringArm3D" type="SpringArm3D" parent="PhysObidientBody2"]
 shape = SubResource("SeparationRayShape3D_08cdy")
 
-[node name="CuerdaImp2" parent="." node_paths=PackedStringArray("first_link", "last_link") instance=ExtResource("3_m1gj3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.14957, 1, 0.405386)
-first_link = NodePath("../MasterPost/MasterSt2")
-last_link = NodePath("../PhysObidientBody/ObidientSt")
-chained_links_count = 30
-
-[node name="PhysObidientBody" type="RigidBody3D" parent="." node_paths=PackedStringArray("to_follow", "to_rotate_order")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.4212, 1, 0.405386)
-collision_layer = 4
-collision_mask = 4
-axis_lock_angular_x = true
-axis_lock_angular_z = true
-gravity_scale = 0.0
-script = ExtResource("6_m1gj3")
-to_follow = NodePath("../Character/Head2/Holder")
-to_rotate_order = NodePath("../Character/Head2")
-follow_force = 4000.0
-metadata/_edit_group_ = true
-
-[node name="PuppCharCollider" type="CollisionShape3D" parent="PhysObidientBody"]
-shape = SubResource("BoxShape3D_jar1g")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysObidientBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7)
-mesh = SubResource("BoxMesh_aaahy")
-
-[node name="ObidientSt" type="Marker3D" parent="PhysObidientBody"]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 0, 0, -0.3)
-
-[node name="SpringArm3D" type="SpringArm3D" parent="PhysObidientBody"]
-shape = SubResource("SeparationRayShape3D_08cdy")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="PhysObidientBody"]
-mesh = SubResource("BoxMesh_rs34o")
-surface_material_override/0 = SubResource("StandardMaterial3D_7wuba")
-
-[node name="Character" parent="." node_paths=PackedStringArray("HEAD", "CAMERA") instance=ExtResource("5_m1gj3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.2, 0, 0.878)
-collision_mask = 3
-floor_stop_on_slope = false
-jump_velocity = 7.155
-HEAD = NodePath("Head2")
-CAMERA = NodePath("Head2/Camera3D")
-controls = {
-&"BACKWARD": "cs_backward",
-&"CROUCH": "crouch",
-&"FORWARD": "cs_forward",
-&"JUMP": "ui_accept",
-&"LEFT": "cs_left",
-&"PAUSE": "ui_cancel",
-&"RIGHT": "cs_right",
-&"SPRINT": "sprint"
-}
-in_air_momentum = false
-continuous_jumping = false
-
-[node name="Head2" type="Node3D" parent="Character"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Character/Head2"]
-
-[node name="Holder" type="Marker3D" parent="Character/Head2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.8)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Character/Head2/Holder"]
-mesh = SubResource("BoxMesh_jar1g")
-surface_material_override/0 = SubResource("StandardMaterial3D_aaahy")
-
-[node name="Holder2" type="Marker3D" parent="Character/Head2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -0.8)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Character/Head2/Holder2"]
-mesh = SubResource("BoxMesh_jar1g")
-surface_material_override/0 = SubResource("StandardMaterial3D_aaahy")
-
-[node name="PupetBall2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40231, 0.839638, 1.02329)
-mass = 5.0
+[node name="PupetBall3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6442666, 13.858141, 8.008606)
+mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_m1gj3")
 metadata/_edit_group_ = true
 
-[node name="BallSt2" type="Marker3D" parent="PupetBall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+[node name="BallSt2" type="Marker3D" parent="PupetBall3"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PupetBall2/BallSt2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PupetBall3/BallSt2"]
 mesh = SubResource("BoxMesh_jar1g")
 surface_material_override/0 = SubResource("StandardMaterial3D_aaahy")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PupetBall2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PupetBall3"]
 shape = SubResource("SphereShape3D_m1gj3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PupetBall2"]
-mesh = SubResource("SphereMesh_m1gj3")
-
-[node name="CuerdaImp4" parent="." node_paths=PackedStringArray("first_link", "first_body", "last_link", "last_body") instance=ExtResource("3_m1gj3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85287, 1.8944, 0.116861)
-first_link = NodePath("../MasterPost/MasterSt4")
-first_body = NodePath("../MasterPost")
-last_link = NodePath("../PupetBall/BallSt1")
-last_body = NodePath("../PupetBall")
-chained_links_count = 20
-
-[node name="PupetBall" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.40996, 1.55976, -0.190707)
-mass = 50.0
-constant_force = Vector3(-33.735, 507.755, 0)
-metadata/_edit_group_ = true
-
-[node name="BallSt1" type="Marker3D" parent="PupetBall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504903, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PupetBall"]
-shape = SubResource("SphereShape3D_08cdy")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PupetBall"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PupetBall3"]
 mesh = SubResource("SphereMesh_m1gj3")
 
 [node name="PlayableHuman" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60115, 0, 7.6949)
+transform = Transform3D(0.0515168, 0, 0.9986721, 0, 1, 0, -0.9986721, 0, 0.0515168, -8.0549135, 0, 3.326509)
+visible = false
 mass = 150.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayableHuman"]
@@ -3314,9 +3446,9 @@ skin = SubResource("Skin_cuee5")
 surface_material_override/0 = SubResource("StandardMaterial3D_mmma5")
 
 [node name="PhysicalBone3D" type="PhysicalBone3D" parent="PlayableHuman/RootNode/Human Armature/Skeleton3D"]
-transform = Transform3D(0.0026346254, 0.005756865, 0.036942687, 0.020131297, 0.030989157, -0.006264807, -0.031506103, 0.020282393, -0.0009137457, -0.011736453, 0.057106532, 0.015840769)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005144288, 0.00024492363, -0.00039279935)
-body_offset = Transform3D(0.03748129, -1.3839453e-06, 7.9430174e-07, 1.3783574e-06, 0.037481282, 5.8102887e-07, -8.1781764e-07, -6.124028e-07, 0.037481267, 1.9282103e-05, -9.179115e-06, 1.4722347e-05)
+transform = Transform3D(0.0026346222, 0.00575686, 0.03694269, 0.020131266, 0.030989183, -0.006264804, -0.03150612, 0.02028236, -0.0009137391, -0.01173529, 0.057106804, 0.015841395)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005072729, 0.00022584033, -0.00042182146)
+body_offset = Transform3D(0.037481293, -1.3416284e-06, 7.9069287e-07, 1.3412209e-06, 0.037481293, 5.8766454e-07, -8.153729e-07, -6.207265e-07, 0.037481274, 1.9013882e-05, -8.46386e-06, 1.5810132e-05)
 bone_name = "RightHand"
 
 [node name="AnimationSt" type="Marker3D" parent="PlayableHuman/RootNode/Human Armature/Skeleton3D/PhysicalBone3D"]
@@ -3330,25 +3462,3 @@ libraries = {
 &"": SubResource("AnimationLibrary_r0hx3")
 }
 autoplay = "Human Armature|Punch"
-
-[node name="CuerdaImp5" parent="." node_paths=PackedStringArray("first_link", "first_body", "last_link", "last_body") instance=ExtResource("3_m1gj3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.15622, 1.55918, 8.85536)
-first_link = NodePath("../PlayableHuman/RootNode/Human Armature/Skeleton3D/PhysicalBone3D/AnimationSt")
-first_body = NodePath("../PlayableHuman/RootNode/Human Armature/Skeleton3D/PhysicalBone3D")
-last_link = NodePath("../PuppetPlayBall/PlayBallSt")
-last_body = NodePath("../PuppetPlayBall")
-chained_links_count = 3
-
-[node name="PuppetPlayBall" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.78715, 1.71976, 9.28683)
-mass = 5.0
-metadata/_edit_group_ = true
-
-[node name="PlayBallSt" type="Marker3D" parent="PuppetPlayBall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PuppetPlayBall"]
-shape = SubResource("SphereShape3D_p2b5u")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PuppetPlayBall"]
-mesh = SubResource("SphereMesh_jar1g")

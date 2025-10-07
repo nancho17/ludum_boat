@@ -16,22 +16,60 @@ extends RigidBody3D
 @export var follow_speed: float = 10.0
 @export var velocity_smoothing: float = 0.1
 
+var colide_activation : bool = false
+
+var is_linked : bool = false
+var impulse_go : Array[Vector3]
+var proyectiles_init_pos : Vector3 = Vector3.ZERO
+
+var bullet_speed = 5.0
+var proyectiles_init_v : Vector3 = 15.0 * Vector3.UP
+
 enum FollowMethod {
 	FORCE_BASED,
 	VELOCITY_BASED
 }
-
 func _ready() -> void:
-	gravity_scale = 0.0
+	body_entered.connect(collided_to_thing)
+
+func collided_to_thing(body:Node) -> void:
+	if colide_activation:
+		colide_activation = false
+		print("collition",colide_activation,body)
+		set_linear_damp_mode(RigidBody3D.DAMP_MODE_COMBINE)
+
+func dominated() -> void:
+	print("dominated",is_linked)
+	is_linked = true
+
+func released() -> void:
+	print("released",is_linked)
+	is_linked = false
+
+func apply_launch_to(this_pos : Vector3,obj_pos : Vector3):
+	proyectiles_init_pos = this_pos
+	impulse_go.append(obj_pos)
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if not impulse_go.is_empty():
+		is_linked = false
+		#print(state.get_constant_force(),state.get_total_gravity(),state.get_linear_velocity  ())
+		physic_execute(state,impulse_go.pop_back())
+		impulse_go.clear()
+		return
+		#gpu_particles_3d_2.set_emitting(true)
+
 	if not to_follow:
 		return
-	
+
+	if not is_linked :
+		return
+
 	match follow_method:
 		FollowMethod.FORCE_BASED:
 			_apply_follow_force(state)
-			_apply_look_at_angular_velocity(state)
+			_slow_angular_velocity(state)
+			#_apply_look_at_angular_velocity(state)
 		FollowMethod.VELOCITY_BASED:
 			_apply_follow_velocity(state)
 			_apply_look_at_angular_velocity(state)
@@ -81,6 +119,11 @@ func _apply_hybrid_follow(state: PhysicsDirectBodyState3D) -> void:
 		state.linear_velocity *= 0.45
 
 # Optional: Add rotation to face the target
+func _slow_angular_velocity(state: PhysicsDirectBodyState3D) -> void:
+	if not to_rotate_order:
+		return
+	state.angular_velocity *= 0.85
+
 func _apply_look_at_angular_velocity(state: PhysicsDirectBodyState3D) -> void:
 	if not to_rotate_order:
 		return
@@ -99,8 +142,35 @@ func _apply_look_at_angular_velocity(state: PhysicsDirectBodyState3D) -> void:
 		var damping_factor_angular = 0.36  # Adjust to prevent overshooting
 		
 		# Apply angular velocity directly
+
 		state.angular_velocity.y += velocity_correction * damping_factor_angular
-		
-		#print("E: ", angle_diff, " desired_vel: ", desired_angular_velocity, " current_vel: ", current_angular_velocity)
+		print("E: ", angle_diff, " desired_vel: ", desired_angular_velocity, " current_vel: ", current_angular_velocity)
 	else:
 		state.angular_velocity.y *= 0.45
+		
+		
+	#set_global_position(proyectiles_init_pos)
+	#bullet_collider.set_disabled.call_deferred(false)
+
+func physic_execute(state:PhysicsDirectBodyState3D, obj_position : Vector3):
+	set_linear_damp_mode(RigidBody3D.DAMP_MODE_REPLACE)
+	colide_activation = true
+	#global_transform = global_transform.looking_at(Vector3(obj_position.x, get_global_position().y, obj_position.z))
+	#set_global_position(proyectiles_init_pos)
+	global_transform = global_transform.looking_at(obj_position)
+	transform= transform.rotated_local(Vector3(1,0, 0), -PI/2)
+	set_visible(true)
+
+	var dir_vec = (obj_position - get_global_position())
+	var an_angle:float = -atan(dir_vec.z/dir_vec.x)
+	#var offset := Vector3(0.0,0.0,0.0)
+	#dir_vec +=offset
+	
+	var gravity_v := Vector3(0.0,-9.8,0.0)
+	var f_time = dir_vec.length() / bullet_speed
+	var vel_f : Vector3  =  (dir_vec/ f_time) - (gravity_v * f_time * 0.5) # -(gravity_v * state.get_step())
+	var moment = get_mass() * vel_f 
+	var initial_vel = proyectiles_init_v-state.get_linear_velocity()
+
+	state.set_linear_velocity(vel_f)
+	state.integrate_forces()
