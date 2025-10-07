@@ -39,11 +39,12 @@ func collided_to_thing(body:Node) -> void:
 		set_linear_damp_mode(RigidBody3D.DAMP_MODE_COMBINE)
 
 func dominated() -> void:
-	print("dominated",is_linked)
+	print("dominated ",is_linked)
 	is_linked = true
+	set_sleeping(false)
 
 func released() -> void:
-	print("released",is_linked)
+	print("released ",is_linked)
 	is_linked = false
 
 func apply_launch_to(this_pos : Vector3,obj_pos : Vector3):
@@ -91,7 +92,6 @@ func _apply_follow_force(state: PhysicsDirectBodyState3D) -> void:
 		# Clamp force to prevent unrealistic acceleration
 	if total_force.length() > max_follow_force:
 		total_force = total_force.normalized() * max_follow_force
-	
 	state.apply_central_force(total_force)
 
 # Method 2: Velocity-based approach (more predictable but less realistic)

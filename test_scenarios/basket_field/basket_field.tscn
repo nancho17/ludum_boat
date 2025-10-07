@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://ce72qflh8f7t3"]
+[gd_scene load_steps=69 format=4 uid="uid://ce72qflh8f7t3"]
 
 [ext_resource type="Script" uid="uid://c07jjnlm12pie" path="res://test_scenarios/cuerda_attached/cuerda_attached.gd" id="1_mctva"]
 [ext_resource type="Environment" uid="uid://i18reu5ancuj" path="res://general/intro_enviroment.tres" id="2_ghhgp"]
@@ -11,8 +11,9 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2o06e"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m1gj3"]
-friction = 0.8
-bounce = 0.8
+friction = 0.81
+rough = true
+bounce = 0.78
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2o06e"]
 cull_mode = 2
@@ -72,8 +73,22 @@ material = SubResource("ShaderMaterial_p2b5u")
 radius = 0.25
 height = 0.5
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmu57"]
+no_depth_test = true
+albedo_color = Color(0.36033344, 0.141, 0.47, 1)
+emission_enabled = true
+emission = Color(0.7304733, 0.77, 0.17710002, 1)
+emission_energy_multiplier = 11.73
+
+[sub_resource type="SphereMesh" id="SphereMesh_jrh53"]
+material = SubResource("StandardMaterial3D_mmu57")
+radius = 0.2
+height = 0.4
+
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2o06e"]
 auto_exposure_enabled = true
+auto_exposure_scale = 0.3
+auto_exposure_speed = 0.4
 dof_blur_far_enabled = true
 dof_blur_far_distance = 400.0
 dof_blur_near_distance = 0.5
@@ -197,6 +212,10 @@ use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.834, 0.124)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_35tw5"]
+rough = true
+absorbent = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ubrtp"]
 size = Vector3(1, 5, 1)
@@ -2813,6 +2832,26 @@ text = "VS"
 layout_mode = 2
 text = "asd"
 
+[node name="Control" type="Control" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="PlayaGui" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Aet" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/PlayaGui"]
+layout_mode = 2
+text = "asdasd"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/PlayaGui"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 3.0
+step = 0.1
+value = 3.0
+
 [node name="Camera3D3" type="Camera3D" parent="."]
 transform = Transform3D(-0.95502, 0.236048, -0.179495, 0, 0.605294, 0.796002, 0.296541, 0.760198, -0.578068, -0.70066, 3.02419, -1.29052)
 
@@ -2857,13 +2896,18 @@ script = ExtResource("3_2o06e")
 basket_pupet = NodePath("../BasketPupet")
 target_score = NodePath("../RingPost/RingTarget")
 
+[node name="Aefvt" type="MeshInstance3D" parent="game_char"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.802812, 1.1180398, 0.87800014)
+mesh = SubResource("SphereMesh_jrh53")
+skeleton = NodePath("../Character")
+
 [node name="Character" parent="game_char" node_paths=PackedStringArray("HEAD", "CAMERA") instance=ExtResource("6_qi28u")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.2, 0, 0.878)
 collision_mask = 3
 floor_stop_on_slope = false
 jump_velocity = 7.3
 HEAD = NodePath("Head2")
-CAMERA = NodePath("Head2/Camera3D")
+CAMERA = NodePath("Head2/CharCam")
 controls = {
 &"BACKWARD": "cs_backward",
 &"CROUCH": "crouch",
@@ -2880,7 +2924,7 @@ continuous_jumping = false
 [node name="Head2" type="Node3D" parent="game_char/Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="game_char/Character/Head2"]
+[node name="CharCam" type="Camera3D" parent="game_char/Character/Head2"]
 attributes = SubResource("CameraAttributesPractical_2o06e")
 current = true
 
@@ -2989,6 +3033,7 @@ texture = SubResource("GradientTexture2D_35tw5")
 
 [node name="MasterPost" type="StaticBody3D" parent="."]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -10, 2, 0)
+physics_material_override = SubResource("PhysicsMaterial_35tw5")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MasterPost"]
@@ -3088,6 +3133,7 @@ shape = SubResource("SphereShape3D_m1gj3")
 mesh = SubResource("SphereMesh_m1gj3")
 
 [node name="PlayableHuman" type="RigidBody3D" parent="."]
+process_mode = 4
 transform = Transform3D(0.0515168, 0, 0.9986721, 0, 1, 0, -0.9986721, 0, 0.0515168, -8.0549135, 0, 3.326509)
 visible = false
 mass = 150.0
